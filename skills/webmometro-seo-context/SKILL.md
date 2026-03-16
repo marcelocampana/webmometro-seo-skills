@@ -26,7 +26,7 @@ Genera el perfil del negocio para un dominio. Todos los skills webmometro-seo lo
 Usa los MCPs en paralelo para inferir el contexto sin preguntar nada al usuario:
 
 1. `mcp__dataforseo__onpage_task_post` en la homepage → title, meta, H1-H2, body text. Guardar: onpage_score, issues detectados (sin H1, título largo, sin alt text, etc.)
-2. `mcp__gsc__search_analytics` → top 20 keywords por clicks (últimos 28 días). Si falla o retorna vacío, continuar sin datos GSC y notificar al usuario.
+2. `mcp__gsc__search_analytics` → top 20 keywords por clicks (últimos 28 días). Si falla o retorna vacío (dominio no en GSC del usuario o sin permisos), usar `mcp__dataforseo__labs_google_ranked_keywords` (target: dominio, location_code: 2152, language_code: es, limit: 20) como fuente alternativa. Notificar al usuario cuál fuente se usó.
 3. `mcp__dataforseo__labs_google_competitors_domain` (target: dominio, location_code: 2152, language_code: es, limit: 15) → dominios competidores según Google
 4. `mcp__dataforseo__labs_google_categories_for_domain` (target: dominio — solo este parámetro) → categoría de industria. Si falla, omitir sin interrumpir el flujo.
 
