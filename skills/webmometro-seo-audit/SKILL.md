@@ -52,12 +52,7 @@ Auditoría profunda de una página o sitio completo. Combina Content Score con S
    - No → llamar a `webmometro-seo-serp` + `webmometro-seo-benchmarks`
 5. Calcular **Content Score** via `webmometro-seo-score`
 6. Calcular **SEO Health Index** (0-100)
-7. **Viabilidad de demanda por audiencia** (si el dominio tiene audiencias definidas en context.md):
-   - Para cada audiencia del context.md, razonar cómo buscaría en Google
-   - Generar 6-8 keywords representativas por audiencia (términos amplios + long tail)
-   - Llamar a `mcp__dataforseo__keywords_google_ads_search_volume` (location_code: 2152, language_code: es)
-   - Clasificar cada audiencia: ✅ VIABLE / ⚠️ DEMANDA BAJA / ❌ DEMANDA NULA
-   - Recomendar canal alternativo para audiencias donde SEO no aplica
+7. Si existe `## Viabilidad de demanda por audiencia` en context.md → leerla y usarla para priorizar hallazgos según la audiencia viable (ej: si solo Audiencia 1 es viable, priorizar hallazgos que impactan esa audiencia)
 8. Generar hallazgos ultra-específicos: "falta keyword en H2 #2, párrafo 5"
 9. Priorizar según objetivo declarado y contexto del negocio
 

@@ -50,6 +50,25 @@ Filtrar dominios no relevantes: redes sociales (instagram.com, facebook.com, you
 
 **Peers organizacionales** — organizaciones del mismo tipo/industria (no necesariamente competidores de contenido). Mínimo 8, idealmente 10+. Útiles para análisis de gaps de contenido y benchmarks de estrategia.
 
+### Paso 2b — Viabilidad de demanda por audiencia
+
+Si el negocio tiene más de una audiencia definida (inferida del sitio o del borrador):
+
+Para cada audiencia:
+1. Razonar cómo esa audiencia buscaría en Google — pensar en sus palabras reales, no en términos técnicos del negocio
+2. Generar 6-8 keywords representativas: términos amplios + long tail + variantes sin modificador geográfico
+3. Llamar a `mcp__dataforseo__keywords_google_ads_search_volume` (location_code: 2152, language_code: es)
+4. Clasificar según volumen total del clúster:
+   - ✅ VIABLE: >500 búsquedas/mes — SEO justificado
+   - ⚠️ BAJA: 50-500 búsquedas/mes — SEO posible pero con expectativas bajas
+   - ❌ NULA: <50 búsquedas/mes — SEO no es el canal
+5. Para audiencias ⚠️ o ❌: recomendar canal alternativo (newsletter, PR digital, LinkedIn, eventos, etc.)
+
+Incluir resumen en el borrador para que el usuario valide.
+Guardar tabla completa en context.md bajo `## Viabilidad de demanda por audiencia`.
+
+**Nota**: Keywords con modificadores locales específicos ("chile", "minsal", etc.) tienden a retornar null en la API porque el volumen está bajo el umbral mínimo (~10/mes). Usar primero términos amplios y agregar variantes locales solo si el término base tiene volumen.
+
 ### Paso 3 — Borrador y validación
 
 Presenta el borrador al usuario. Incluir TODAS las secciones para que el usuario pueda validar y corregir:

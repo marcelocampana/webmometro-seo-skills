@@ -31,5 +31,20 @@
 | Keyword | Clicks/mes | Posición | Intención |
 |---|---|---|---|
 
+## Viabilidad de demanda por audiencia
+
+| Audiencia | Demanda SEO | Veredicto | Canal recomendado |
+|---|---|---|---|
+| {audiencia 1} | {vol. clúster}/mes | ✅ VIABLE / ⚠️ BAJA / ❌ NULA | {canal} |
+
+### {Audiencia 1} — {veredicto}
+Keywords con volumen: {keyword} ({vol}), {keyword} ({vol}).
+Ajuste estratégico: {recomendación}.
+
+## Notas técnicas
+- **CMS**: {cms}
+- **OnPage Score**: {score}/100
+- **Issues**: {lista de issues detectados}
+
 ## Notas estratégicas
 {cualquier observación relevante sobre la estrategia SEO del negocio}
