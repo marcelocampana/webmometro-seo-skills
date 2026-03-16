@@ -7,7 +7,6 @@ description: |
   Todos los demás skills webmometro-seo leen este contexto automáticamente.
   Triggers: "context", "perfil del negocio", "contexto del sitio", "definir negocio", "configurar dominio"
 argument-hint: "[dominio]"
-allowed-tools: Read, Write, Glob
 ---
 
 # webmometro-seo-context — Contexto del Negocio
@@ -26,9 +25,10 @@ Genera el perfil del negocio para un dominio. Todos los skills webmometro-seo lo
 
 Usa los MCPs en paralelo para inferir el contexto sin preguntar nada al usuario:
 
-1. `mcp__dataforseo__onpage_task_post` en la homepage → title, meta, H1-H2, body text
-2. `mcp__gsc__search_analytics` → top 20 keywords por clicks (últimos 28 días)
+1. `mcp__dataforseo__onpage_task_post` en la homepage → title, meta, H1-H2, body text. Guardar: onpage_score, issues detectados (sin H1, título largo, sin alt text, etc.)
+2. `mcp__gsc__search_analytics` → top 20 keywords por clicks (últimos 28 días). Si falla o retorna vacío, continuar sin datos GSC y notificar al usuario.
 3. `mcp__dataforseo__labs_google_competitors_domain` (target: dominio, location_code: 2152, language_code: es, limit: 15) → dominios competidores según Google
+4. `mcp__dataforseo__labs_google_categories_for_domain` (target: dominio — solo este parámetro) → categoría de industria. Si falla, omitir sin interrumpir el flujo.
 
 Luego, con las top 3 keywords por clicks de GSC:
 4. `mcp__dataforseo__serp_google_organic_live` × 3 (location_code: 2152, language_code: es, depth: 10) → dominios orgánicos reales en SERPs relevantes
@@ -77,6 +77,14 @@ He analizado [dominio] y esto es lo que inferí. Corrígeme en lo que esté mal:
 ### Paso 4 — Guardado
 
 Incorpora correcciones y guarda en `reports/{dominio}/context.md`.
+
+El archivo debe incluir todas las secciones del borrador validado, más:
+
+- **Keywords prioritarias GSC**: tabla con keyword, clicks, impresiones, posición (top 10 por clicks)
+- **Notas técnicas**: onpage_score, issues detectados por OnPage API (sin H1, título largo, sin alt text, etc.), CMS detectado
+- **Industria**: categoría inferida por DataForSEO (si disponible)
+
+Estas secciones no se presentan al usuario para validar — se guardan directamente desde los datos de los MCPs.
 
 Al finalizar informa:
 > "Contexto guardado. Si tienes pautas internas, marcos SEO o guías de marca, agrégalos como archivos `.md` en `reports/{dominio}/context/` — los skills los leerán automáticamente con prioridad sobre este archivo."
