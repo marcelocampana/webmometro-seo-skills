@@ -52,7 +52,7 @@ Filtrar dominios no relevantes: redes sociales (instagram.com, facebook.com, you
 
 ### Paso 3 — Borrador y validación
 
-Presenta el borrador al usuario:
+Presenta el borrador al usuario. Incluir TODAS las secciones para que el usuario pueda validar y corregir:
 
 ```
 He analizado [dominio] y esto es lo que inferí. Corrígeme en lo que esté mal:
@@ -68,7 +68,13 @@ He analizado [dominio] y esto es lo que inferí. Corrígeme en lo que esté mal:
 
 **Peers organizacionales**: [lista — organizaciones similares]
 
-**Pilares de contenido**: [temas inferidos de las keywords]
+**Keywords prioritarias GSC — últimos 28 días**
+| Keyword | Clicks | Impresiones | Posición |
+|---|---|---|---|
+| [keyword] | [clicks] | [impresiones] | [posición] |
+... (top 10 por clicks)
+
+**Pilares de contenido**: [temas inferidos de las keywords GSC]
 **Tono de marca**: [formal / conversacional / técnico]
 
 ¿Qué ajustarías?
