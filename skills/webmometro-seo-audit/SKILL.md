@@ -30,7 +30,9 @@ Auditoría profunda de una página o sitio completo. Combina Content Score con S
    - `reports/{dominio}/context/*.md` → leerlos (tienen prioridad)
    - Si no existe → sugerir `/webmometro-seo context {dominio}` antes de continuar
 
-2. **Pregunta única al usuario**:
+2. **Inferir objetivo desde el contexto**:
+   - Si existe context.md → leer `## Objetivo principal` y usarlo directamente, sin preguntar
+   - Si no existe context.md → preguntar al usuario:
 ```
 ¿Cuál es el objetivo de esta página?
 [A] Atraer tráfico informacional (blog, artículo)
