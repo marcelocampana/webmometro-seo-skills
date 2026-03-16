@@ -14,6 +14,23 @@
 ## Content Score: {score}/100
 > vs Avg competidores: {avg} | vs Top competidor: {top}
 
+## Viabilidad de Demanda SEO por Audiencia
+
+> Solo se incluye cuando el dominio tiene audiencias definidas en context.md.
+
+| Audiencia | Demanda SEO | Veredicto | Canal recomendado |
+|---|---|---|---|
+| {audiencia 1} | {vol. clúster}/mes | ✅ / ⚠️ / ❌ | {canal} |
+| {audiencia 2} | {vol. clúster}/mes | ✅ / ⚠️ / ❌ | {canal} |
+
+### {Audiencia 1} — {veredicto}
+
+| Keyword | Vol. mensual | Oportunidad |
+|---|---|---|
+| {keyword} | {vol} | Alta / Media / Baja |
+
+**Conclusión**: {análisis}. **Ajuste necesario**: {recomendación}.
+
 ## Hallazgos por prioridad
 
 ### Críticos (bloquean rankings)
