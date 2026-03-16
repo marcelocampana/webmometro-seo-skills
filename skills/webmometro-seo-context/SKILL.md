@@ -74,7 +74,11 @@ He analizado [dominio] y esto es lo que inferí. Corrígeme en lo que esté mal:
 | [keyword] | [clicks] | [impresiones] | [posición] |
 ... (top 10 por clicks)
 
-**Pilares de contenido**: [temas inferidos de las keywords GSC]
+**Pilares de contenido**
+| Tema | Keywords relacionadas | Prioridad |
+|---|---|---|
+| [tema agrupado] | [keywords GSC relacionadas] | Alta / Media / Baja |
+... (agrupar keywords semánticamente, asignar prioridad según volumen y clicks)
 **Tono de marca**: [formal / conversacional / técnico]
 
 ¿Qué ajustarías?
