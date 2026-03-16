@@ -24,14 +24,33 @@ Genera el perfil del negocio para un dominio. Todos los skills webmometro-seo lo
 
 ### Paso 1 — Análisis automático
 
-Usa los MCPs para inferir el contexto sin preguntar nada al usuario:
+Usa los MCPs en paralelo para inferir el contexto sin preguntar nada al usuario:
 
 1. `mcp__dataforseo__onpage_task_post` en la homepage → title, meta, H1-H2, body text
 2. `mcp__gsc__search_analytics` → top 20 keywords por clicks (últimos 28 días)
-3. `mcp__dataforseo__serp_google_organic_live` con las top 3 keywords → competidores recurrentes
-4. `mcp__dataforseo__labs_google_categories_for_domain` → categoría de industria
+3. `mcp__dataforseo__labs_google_competitors_domain` (target: dominio, location_code: 2152, language_code: es, limit: 15) → dominios competidores según Google
 
-### Paso 2 — Borrador y validación
+Luego, con las top 3 keywords por clicks de GSC:
+4. `mcp__dataforseo__serp_google_organic_live` × 3 (location_code: 2152, language_code: es, depth: 10) → dominios orgánicos reales en SERPs relevantes
+
+**Importante**: los resultados de SERP pueden ser archivos grandes. Extraer solo los campos `domain` de cada item orgánico. No asumir competidores que no aparezcan en los datos.
+
+Para ampliar peers organizacionales (organizaciones similares al negocio, no necesariamente competidores SERP):
+5. `mcp__dataforseo__serp_google_organic_live` con keyword inferida del tipo "[industria/tipo de organización] [país]" (ej: "fundacion cancer chile", "agencia marketing digital chile") → dominios de organizaciones similares
+
+### Paso 2 — Clasificación de competidores
+
+Con los dominios recopilados, clasificar en dos listas distintas:
+
+**Competidores SERP** — dominios que aparecen en las SERPs de las keywords del negocio. Separar en:
+- *Nacionales*: dominios del mismo país
+- *Internacionales*: dominios de otros países
+
+Filtrar dominios no relevantes: redes sociales (instagram.com, facebook.com, youtube.com, tiktok.com), Wikipedia, agregadores genéricos.
+
+**Peers organizacionales** — organizaciones del mismo tipo/industria (no necesariamente competidores de contenido). Mínimo 8, idealmente 10+. Útiles para análisis de gaps de contenido y benchmarks de estrategia.
+
+### Paso 3 — Borrador y validación
 
 Presenta el borrador al usuario:
 
@@ -42,14 +61,20 @@ He analizado [dominio] y esto es lo que inferí. Corrígeme en lo que esté mal:
 **Objetivo principal**: [leads / ventas / tráfico informacional / marca]
 **Cliente ideal**: [descripción]
 **Propuesta de valor**: [diferenciador]
-**Competidores directos**: [lista de dominios]
+
+**Competidores SERP**
+- Nacionales: [lista]
+- Internacionales: [lista]
+
+**Peers organizacionales**: [lista — organizaciones similares]
+
 **Pilares de contenido**: [temas inferidos de las keywords]
 **Tono de marca**: [formal / conversacional / técnico]
 
 ¿Qué ajustarías?
 ```
 
-### Paso 3 — Guardado
+### Paso 4 — Guardado
 
 Incorpora correcciones y guarda en `reports/{dominio}/context.md`.
 
