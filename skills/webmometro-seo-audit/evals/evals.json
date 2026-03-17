@@ -1,0 +1,11 @@
+{
+  "skill_name": "webmometro-seo-audit",
+  "evals": [
+    {
+      "id": 3,
+      "prompt": "audit site observatoriodelcancer.cl",
+      "expected_output": "Reporte de auditoría del sitio completo guardado en reports/observatoriodelcancer.cl/audits/observatoriodelcancer.cl-site-audit.md con: ranking de páginas por SEO Health Index, detección de canibalización, Core Web Vitals de top 5 páginas, y hallazgos priorizados.",
+      "files": []
+    }
+  ]
+}

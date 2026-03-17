@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -r \"references/\" /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-seo-*/SKILL.md)",
+      "Bash(\"/Users/marcelocampana/Projects/webmometro-seo-skills/webmometro-seo-audit-workspace/skill-snapshot/SKILL.md\")",
+      "mcp__gsc__list_sites",
+      "mcp__gsc__search_analytics",
+      "mcp__dataforseo__onpage_task_post",
+      "mcp__pagespeed__analyze_pagespeed",
+      "mcp__dataforseo__onpage_tasks_ready",
+      "mcp__dataforseo__onpage_pages",
+      "Bash(open /tmp/eval_review_webmometro-seo-audit.html)",
+      "Bash(pip3 install:*)",
+      "mcp__dataforseo__labs_google_competitors_domain",
+      "mcp__dataforseo__labs_google_categories_for_domain",
+      "mcp__dataforseo__serp_google_organic_live",
+      "mcp__dataforseo__onpage_summary",
+      "mcp__dataforseo__keywords_google_ads_search_volume",
+      "mcp__dataforseo__labs_google_domain_rank_overview",
+      "mcp__dataforseo__backlinks_summary",
+      "mcp__dataforseo__labs_google_ranked_keywords",
+      "Read(//Users/marcelocampana/.claude/skills/webmometro-seo-context/**)"
+    ],
+    "additionalDirectories": [
+      "/tmp",
+      "/private/tmp",
+      "/Users/marcelocampana/.claude/skills/webmometro-seo-context",
+      "/Users/marcelocampana/Projects/webmometro-seo-skills/reports/clinicadrazaror.cl"
+    ]
+  }
+}
