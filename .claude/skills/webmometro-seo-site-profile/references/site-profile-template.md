@@ -3,8 +3,43 @@
 
 ## El negocio
 **Descripción**: {descripción en 1-2 líneas}
+
 **Objetivo principal del sitio**: {leads / ventas / tráfico informacional / marca}
+
 **Industria**: {categoría}
+
+**Ubicación**: {ciudad, país — o "nacional" si no tiene presencia local específica}
+
+**Propuesta de valor**: {qué diferencia al negocio de sus competidores}
+
+## Tráfico (Google Analytics 4)
+**GA4 property ID**: {property_id}
+
+### Canales — últimos 28 días
+| Canal | Usuarios nuevos | Usuarios totales | Sesiones | Ses. con interacción | Rebote | Duración prom. | Conversiones |
+|---|---|---|---|---|---|---|---|
+| Organic Search | {new} | {total} | {ses} | {eng} | {br}% | {dur} | {conv} |
+| Paid Search | {new} | {total} | {ses} | {eng} | {br}% | {dur} | {conv} |
+| Direct | {new} | {total} | {ses} | {eng} | {br}% | {dur} | {conv} |
+
+### Canales — últimos 90 días
+| Canal | Usuarios nuevos | Usuarios totales | Sesiones | Ses. con interacción | Rebote | Duración prom. | Conversiones |
+|---|---|---|---|---|---|---|---|
+| Organic Search | {new} | {total} | {ses} | {eng} | {br}% | {dur} | {conv} |
+| Paid Search | {new} | {total} | {ses} | {eng} | {br}% | {dur} | {conv} |
+| Direct | {new} | {total} | {ses} | {eng} | {br}% | {dur} | {conv} |
+
+### Dispositivos — últimos 90 días
+| Dispositivo | Sesiones | % |
+|---|---|---|
+| Mobile | {ses} | {pct}% |
+| Desktop | {ses} | {pct}% |
+| Tablet | {ses} | {pct}% |
+
+### Top páginas orgánicas — últimos 90 días
+| Página | Sesiones | Sesiones con interacción | Tasa de rebote | Duración prom. | Tasa de conversión |
+|---|---|---|---|---|---|
+| {url} | {ses} | {eng} | {br}% | {dur} | {conv}% |
 
 ## Audiencias
 | Nombre | Tipo | Descripción | Rol para la organización | Cómo se logra que llegue |
@@ -34,8 +69,6 @@
 #### Ajuste estratégico
 {Oportunidad o limitación concreta basada en los datos — dónde está la ventana real, qué keywords atacar primero, qué obstáculos hay.}
 
-## Propuesta de valor
-{qué diferencia al negocio de sus competidores}
 
 ## Competidores SERP
 

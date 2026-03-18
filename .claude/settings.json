@@ -57,14 +57,18 @@
       "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-seo-page-opportunity/references/opportunity-template.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-page-opportunity/references/opportunity-template.md)",
       "mcp__dataforseo__labs_google_bulk_keyword_difficulty",
       "mcp__dataforseo__labs_google_search_intent",
-      "mcp__dataforseo__labs_google_related_keywords"
+      "mcp__dataforseo__labs_google_related_keywords",
+      "mcp__analytics-mcp__get_account_summaries",
+      "mcp__analytics-mcp__run_report",
+      "Bash(echo \"SEO_REPORTS_PATH: $SEO_REPORTS_PATH\")"
     ],
     "additionalDirectories": [
       "/tmp",
       "/private/tmp",
       "/Users/marcelocampana/.claude/skills/webmometro-seo-context",
       "/Users/marcelocampana/Projects/webmometro-seo-skills/reports/clinicadrazaror.cl",
-      "/Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-site-profile"
+      "/Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-site-profile",
+      "/Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-site-profile/references"
     ]
   }
 }
