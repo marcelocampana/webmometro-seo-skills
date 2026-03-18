@@ -1,1 +1,4 @@
 .claude/** merge=ours
+.agents/** merge=ours
+CLAUDE.md merge=ours
+
