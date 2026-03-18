@@ -1,0 +1,23 @@
+{
+  "skill_name": "webmometro-seo-page-opportunity",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "La página clinicadrazaror.cl/tratamientos/esteticos/hilos-tensores tiene poco tráfico. Evalúa si tiene oportunidad para rankear por 'tipos de hilos tensores' e 'hilos tensores PDO'",
+      "expected_output": "Reporte guardado en reports/clinicadrazaror.cl/opportunities/. Debe incluir: volumen y KD de ambas keywords, posición actual de la página en GSC para esas keywords o variantes, SERP snapshot de cada una (top 5, features activas), gap on-page vs competidores, tabla comparativa de ambas keywords con Opportunity Score, veredicto diferenciado por keyword, y plan de acción solo si alguna keyword es viable (✅ o ⚠️).",
+      "files": ["reports/clinicadrazaror.cl/context.md"]
+    },
+    {
+      "id": 2,
+      "prompt": "¿Puede clinicadrazaror.cl/tratamientos/corporales/aumento-de-gluteos posicionarse para 'aumento de gluteos sin cirugia'? Es una keyword que quiero atacar",
+      "expected_output": "Reporte guardado en reports/clinicadrazaror.cl/opportunities/. Debe incluir: diagnóstico de demanda y KD de 'aumento de gluteos sin cirugia', posición actual de la página para esa keyword en GSC, análisis de canibalización (si otra URL del dominio ya rankea), SERP snapshot con tipo de contenido dominante, evaluación del gap on-page (esfuerzo estimado), nivel de topic authority del dominio en esa área, Opportunity Score con veredicto justificado. Si el KD es muy alto o la topic authority es nula, el veredicto debe reflejarlo (posiblemente ❌ o ⚠️ con requisito previo de cluster).",
+      "files": ["reports/clinicadrazaror.cl/context.md"]
+    },
+    {
+      "id": 3,
+      "prompt": "Tengo la página clinicadrazaror.cl/tratamientos/esteticos/bioestimulacion-sculptra y quiero saber cuál de estas keywords vale más la pena: 'sculptra chile', 'sculptra precio', 'sculptra vs acido hialuronico'",
+      "expected_output": "Reporte guardado en reports/clinicadrazaror.cl/opportunities/. Debe incluir análisis de las 3 keywords con volumen, KD e intención. La tabla comparativa es obligatoria dado que son 3 keywords. El reporte debe identificar que 'sculptra precio' tiene intención transaccional directa (diferente a comparativa) y que 'sculptra vs acido hialuronico' puede requerir un tipo de contenido distinto (comparativa). El veredicto debe recomendar UNA keyword como prioritaria con justificación basada en datos.",
+      "files": ["reports/clinicadrazaror.cl/context.md"]
+    }
+  ]
+}
