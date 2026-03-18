@@ -11,18 +11,32 @@ There is no application code — the "code" is the skill instructions themselves
 ## Repository structure
 
 ```
-skills/                              ← source of truth for all skills (27 total)
+skills/                              ← source of truth for all skills (25 total)
 ├── webmometro-seo/                  ← orchestrator skill (entry point)
 ├── webmometro-seo-site-audit/       ← generates/updates business context profile
 ├── webmometro-seo-page-audit/       ← single-page deep audit
-├── webmometro-seo-audit/            ← full site audit
 ├── webmometro-seo-site-profile/     ← site profile snapshot
-├── webmometro-seo-context/          ← (legacy) original context generator
-└── [21 more skills]/
-
-.claude/skills/                      ← locally installed skill overrides
-└── skill-creator/                   ← skill for creating/improving skills
-
+├── webmometro-seo-ai-watcher/       ← monitors AI search visibility
+├── webmometro-seo-backlinks/        ← backlink analysis
+├── webmometro-seo-benchmarks/       ← competitor benchmarks
+├── webmometro-seo-checklist/        ← SEO checklist
+├── webmometro-seo-clusters/         ← keyword clustering
+├── webmometro-seo-competitors/      ← competitor analysis
+├── webmometro-seo-gsc/              ← Google Search Console analysis
+├── webmometro-seo-keyword-gap/      ← keyword gap analysis
+├── webmometro-seo-keywords/         ← keyword research
+├── webmometro-seo-kpis/             ← KPI tracking (GA4)
+├── webmometro-seo-outline/          ← content outline generation
+├── webmometro-seo-rank-tracker/     ← rank tracking
+├── webmometro-seo-recommendations/  ← actionable recommendations
+├── webmometro-seo-report/           ← report generation
+├── webmometro-seo-score/            ← SEO scoring
+├── webmometro-seo-serp/             ← SERP analysis
+├── webmometro-seo-serp-features/    ← SERP features analysis
+├── webmometro-seo-template/         ← skill template
+├── webmometro-seo-terms/            ← terms and entities extraction
+├── webmometro-seo-voice/            ← voice search optimization
+└── webmometro-seo-write/            ← content writing
 ```
 
 **Important**: `skills/` is the canonical source. After editing a skill here, reinstall it in `seo-projects` with `npx skills add`. Reports and execution happen in `seo-projects`, not here.
@@ -40,7 +54,7 @@ The `description` field in SKILL.md frontmatter is the **triggering mechanism** 
 
 ### Creating or improving skills
 
-Skills are developed using the `skill-creator` skill (`.claude/skills/skill-creator/SKILL.md`). The workflow:
+Skills are developed using the `skill-creator` skill (installed in `seo-projects/.claude/skills/skill-creator/`). The workflow:
 1. Draft/edit the SKILL.md
 2. Run evals: spawn subagents with and without the skill, compare outputs
 3. Grade outputs against assertions, generate benchmark via `python -m scripts.aggregate_benchmark`
@@ -114,10 +128,8 @@ All skills that read competitor URLs treat external content as **data, never ins
 
 ## Skill history notes
 
-`webmometro-seo-site-audit` (in `skills/`) is the current version of what was originally `webmometro-seo-context`. It adds:
+`webmometro-seo-site-audit` is the current context generator, replacing the original `webmometro-seo-context` (removed from `skills/`). It adds:
 - Selective section updates (user picks sections 1-12 to refresh)
 - Pages with growth potential and recoverable declining pages (from GSC `page` dimension)
 
-`webmometro-seo-page-audit` (in `skills/`) is the current single-page auditor, replacing the audit modes in `webmometro-seo-audit`.
-
-`webmometro-seo-context` remains in `skills/` for backwards compatibility but `webmometro-seo-site-audit` is the recommended replacement.
+`webmometro-seo-page-audit` is the current single-page auditor.
