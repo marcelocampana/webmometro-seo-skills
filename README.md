@@ -139,6 +139,17 @@ Los skills usan los siguientes MCP servers. Configúralos en tu `~/.claude/mcp.j
 | `context7` | Documentación actualizada de librerías |
 | `nuxt-ui-remote` | Componentes Nuxt UI (si el stack del cliente es Nuxt) |
 | `analytics-mcp` | Google Analytics 4 (para skills de KPIs) |
+| `clarity-{proyecto}` | Microsoft Clarity — sesiones, heatmaps, comportamiento de usuario |
+
+### Selección automática del MCP de Microsoft Clarity
+
+Los MCPs de Clarity siguen el patrón `clarity-{nombre-proyecto}`. Cualquier skill que use Clarity debe seleccionar el MCP correcto automáticamente:
+
+1. Extrae el dominio de la URL analizada (ej: `bradfordhill.cl`)
+2. Normaliza: minúsculas, sin tildes, espacios → guiones (ej: `bradford-hill`)
+3. Usa el MCP cuyo nombre contenga ese fragmento (ej: `clarity-bradford-hill`)
+4. Si no hay match, confirma con el usuario
+5. Si no existe MCP de Clarity para ese dominio, omite la integración sin error
 
 ---
 

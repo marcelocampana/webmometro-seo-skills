@@ -30,7 +30,10 @@
       "mcp__chrome-devtools__lighthouse_audit",
       "Read(//Users/marcelocampana/.claude/skills/seo-audit/**)",
       "Bash(npm show:*)",
-      "Read(//Users/marcelocampana/Projects/mcps/**)"
+      "Read(//Users/marcelocampana/Projects/mcps/**)",
+      "mcp__clarity-observatorio-del-cancer__query-analytics-dashboard",
+      "mcp__clarity-clinica-dra-zaror__query-analytics-dashboard",
+      "mcp__clarity-bradford-hill__query-analytics-dashboard"
     ],
     "additionalDirectories": [
       "/tmp",

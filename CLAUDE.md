@@ -119,6 +119,17 @@ Page audit and site audit skills check for existing reports before running. If a
 | `pagespeed` | Core Web Vitals via PageSpeed Insights |
 | `chrome-devtools` | Screenshots, navigate, evaluate_script, lighthouse_audit |
 | `analytics-mcp` | Google Analytics 4 (KPIs skill) |
+| `clarity-{proyecto}` | Microsoft Clarity — sesiones, heatmaps, comportamiento de usuario |
+
+### Selección automática del MCP de Microsoft Clarity
+
+Los MCPs de Clarity siguen el patrón de nombre `clarity-{nombre-proyecto}`. Cuando un skill necesite consultar Clarity, debe identificar el MCP correcto así:
+
+1. Toma el dominio de la URL que se está analizando (ej: `bradfordhill.cl`)
+2. Normaliza el nombre: minúsculas, sin tildes, espacios y guiones bajos → guiones (ej: `bradford-hill`)
+3. Busca el MCP disponible cuyo nombre contenga ese fragmento (ej: `clarity-bradford-hill`)
+4. Si no hay match exacto, busca el más similar y confírmalo con el usuario
+5. Si no existe ningún MCP de Clarity para ese dominio, omite la integración sin error
 
 **Location codes**: `2152` = Chile (es). Most skills default to this. Adjust when working with other markets.
 
