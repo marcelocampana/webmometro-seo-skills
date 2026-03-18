@@ -3,13 +3,13 @@ name: webmometro-seo-page-audit
 description: >
   Auditoría SEO profunda de una página específica. Analiza on-page SEO, contenido,
   schema, performance y visibilidad en AI Search para una URL individual. Se apoya
-  en el context.md del negocio para contextualizar hallazgos. Genera un reporte
+  en el site-profile.md del negocio para contextualizar hallazgos. Genera un reporte
   unificado con plan de acción priorizado por impacto en clicks.
   Usar cuando el usuario mencione: "auditar página", "auditar esta URL", "revisar página",
   "page audit", "auditoría de página", "analizar esta página", "revisar esta URL",
   "qué tan bien está esta página", "diagnóstico de página", "optimizar página",
   "mejorar esta página", "por qué no rankea esta página", "page seo", "on-page audit".
-  NO usar para auditorías del sitio completo — derivar a webmometro-seo-context.
+  NO usar para auditorías del sitio completo — derivar a webmometro-seo-site-profile.
 metadata:
   version: 1.0.0
   argument-hint: "[URL de la página]"
@@ -23,7 +23,7 @@ Auditoría SEO profunda de una **página específica**. No del sitio completo.
 
 **Este skill es para UNA página.** Si el usuario pide:
 - Auditoría del sitio completo, diagnóstico general del dominio, health check del sitio → derivar:
-  > "Para auditar el sitio completo, usa `/webmometro-seo-context [dominio]` — ese skill genera un diagnóstico integral con datos GSC, autoridad, canibalización y plan de acción para todo el dominio."
+  > "Para auditar el sitio completo, usa `/webmometro-seo-site-profile [dominio]` — ese skill genera un diagnóstico integral con datos GSC, autoridad, canibalización y plan de acción para todo el dominio."
 - Auditoría de múltiples páginas a la vez → preguntar cuál priorizar primero.
 
 ---
@@ -81,12 +81,12 @@ Ejecutar en este orden.
 
 ### Paso 0 — Contexto del negocio
 
-Verificar si existe `$SEO_REPORTS_PATH/{dominio}/context.md`:
+Verificar si existe `$SEO_REPORTS_PATH/{dominio}/site-profile.md`:
 
 - **Si existe**: leerlo. Extraer: tipo de negocio, audiencia objetivo SEO, pilares de contenido, tono de marca, keywords prioritarias. Este contexto informa qué es un "buen" resultado para esta página.
-- **Si existe `$SEO_REPORTS_PATH/{dominio}/context/`**: leer también los archivos `.md` ahí (prioridad sobre `context.md`).
+- **Si existe `$SEO_REPORTS_PATH/{dominio}/user-context/`**: leer también los archivos `.md` ahí (prioridad sobre `site-profile.md`).
 - **Si no existe**: continuar sin él, pero advertir al usuario:
-  > "No encontré el contexto del negocio para `{dominio}`. El análisis será genérico. Para obtener hallazgos contextualizados al negocio, genera el perfil con `/webmometro-seo-context {dominio}`."
+  > "No encontré el contexto del negocio para `{dominio}`. El análisis será genérico. Para obtener hallazgos contextualizados al negocio, genera el perfil con `/webmometro-seo-site-profile {dominio}`."
 
 ### Paso 0.5 — Identificar MCP de Microsoft Clarity
 

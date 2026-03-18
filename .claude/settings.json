@@ -41,7 +41,7 @@
       "Bash(npx skills:*)",
       "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-seo-page-audit/SKILL.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-page-audit/SKILL.md)",
       "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-seo-page-audit/references/page-audit-template.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-page-audit/references/page-audit-template.md)",
-      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-seo-site-audit/SKILL.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-site-audit/SKILL.md)",
+      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-seo-site-profile/SKILL.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-site-profile/SKILL.md)",
       "Read(//Users/marcelocampana/.local/pipx/venvs/analytics-mcp/bin/**)",
       "Bash(/Users/marcelocampana/Projects/webmometro-seo-skills/.env:*)",
       "Bash(/Users/marcelocampana/Projects/webmometro-seo-skills/.mcp/dataforseo.sh:*)",
@@ -50,13 +50,21 @@
       "Bash(/Users/marcelocampana/Projects/webmometro-seo-skills/.mcp/gsc.sh:*)",
       "Bash(chmod +x /Users/marcelocampana/Projects/webmometro-seo-skills/.mcp/gsc.sh)",
       "Bash(/Users/marcelocampana/Projects/webmometro-seo-skills/.env.example:*)",
-      "mcp__clarity-clinica-dra-zaror__list-session-recordings"
+      "mcp__clarity-clinica-dra-zaror__list-session-recordings",
+      "Bash(mkdir -p /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-page-opportunity)",
+      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-seo-page-opportunity/SKILL.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-page-opportunity/SKILL.md)",
+      "Bash(mkdir -p /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-page-opportunity/references)",
+      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-seo-page-opportunity/references/opportunity-template.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-page-opportunity/references/opportunity-template.md)",
+      "mcp__dataforseo__labs_google_bulk_keyword_difficulty",
+      "mcp__dataforseo__labs_google_search_intent",
+      "mcp__dataforseo__labs_google_related_keywords"
     ],
     "additionalDirectories": [
       "/tmp",
       "/private/tmp",
       "/Users/marcelocampana/.claude/skills/webmometro-seo-context",
-      "/Users/marcelocampana/Projects/webmometro-seo-skills/reports/clinicadrazaror.cl"
+      "/Users/marcelocampana/Projects/webmometro-seo-skills/reports/clinicadrazaror.cl",
+      "/Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-site-profile"
     ]
   }
 }

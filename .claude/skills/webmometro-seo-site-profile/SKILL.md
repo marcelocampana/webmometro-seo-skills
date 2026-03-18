@@ -1,5 +1,5 @@
 ---
-name: webmometro-seo-site-audit
+name: webmometro-seo-site-profile
 description: |
   Genera y actualiza el perfil de contexto del negocio para un dominio.
   Analiza el sitio con MCPs para inferir qué hace el negocio, a quién le vende,
@@ -14,7 +14,7 @@ metadata:
   argument-hint: "[dominio]"
 ---
 
-# webmometro-seo-site-audit — Contexto del Negocio
+# webmometro-seo-site-profile — Site Profile
 
 Genera el perfil del negocio para un dominio. Todos los skills webmometro-seo lo leen automáticamente antes de cada análisis, permitiéndoles hacer recomendaciones contextualizadas al negocio en lugar de análisis genéricos.
 
@@ -40,7 +40,7 @@ Todas las referencias a `$SEO_REPORTS_PATH` en este skill se resuelven como `REP
 
 ## Manejo de contexto existente
 
-Antes de iniciar, verificar si ya existe `$SEO_REPORTS_PATH/{dominio}/context.md`:
+Antes de iniciar, verificar si ya existe `$SEO_REPORTS_PATH/{dominio}/site-profile.md`:
 
 - **Si no existe**: ejecutar el flujo completo sin preguntar nada.
 
@@ -50,7 +50,7 @@ Antes de iniciar, verificar si ya existe `$SEO_REPORTS_PATH/{dominio}/context.md
 
   - **Si han pasado 15 días o menos**: el contexto es reciente — presumir que la mayoría de la información sigue vigente. Mostrar el mensaje siguiente y pedir al usuario que indique qué secciones actualizar anotando los números. Si responde "todo" o "A", ejecutar el flujo completo. Si no responde nada o dice que está bien, detener.
 
-  > "El contexto de `{dominio}` fue actualizado hace {N} días ({fecha}). La información es reciente — probablemente no necesita regenerarse por completo.
+  > "El site profile de `{dominio}` fue actualizado hace {N} días ({fecha}). La información es reciente — probablemente no necesita regenerarse por completo.
   >
   > Si quieres actualizar alguna sección específica, indica los números (ej: 3, 7). Puedes indicar varias. Para regenerar todo escribe **A**. Para cancelar escribe **C**.
   >
@@ -274,7 +274,7 @@ Volumen total: [X]/mes → [veredicto]
 
 ### Paso 5 — Guardado
 
-Incorpora correcciones y guarda en `$SEO_REPORTS_PATH/{dominio}/context.md` usando el template en `references/context-template.md`.
+Incorpora correcciones y guarda en `$SEO_REPORTS_PATH/{dominio}/site-profile.md` usando el template en `references/context-template.md`.
 
 **Campos obligatorios a completar al guardar:**
 - `{date}` en "Generado" y "Última actualización" → usar la fecha actual (formato: YYYY-MM-DD)
@@ -290,14 +290,14 @@ Incorpora correcciones y guarda en `$SEO_REPORTS_PATH/{dominio}/context.md` usan
 - **Notas técnicas**: onpage_score, issues detectados, CMS detectado. Si OnPage no estuvo disponible, registrar: "OnPage no disponible al momento de la generación — ejecutar `onpage_task_get` manualmente con task_id: {id}".
 
 Al finalizar informar:
-> "Contexto guardado en `$SEO_REPORTS_PATH/{dominio}/context.md`. Si tienes pautas internas, marcos SEO o guías de marca, agrégalos como archivos `.md` en `$SEO_REPORTS_PATH/{dominio}/context/` — los skills los leerán automáticamente con prioridad sobre este archivo."
+> "Site profile guardado en `$SEO_REPORTS_PATH/{dominio}/site-profile.md`. Si tienes pautas internas, marcos SEO o guías de marca, agrégalos como archivos `.md` en `$SEO_REPORTS_PATH/{dominio}/user-context/` — los skills los leerán automáticamente con prioridad sobre este archivo."
 
 ## Estructura de archivos
 
 ```
 $SEO_REPORTS_PATH/{dominio}/
-├── context.md              ← generado por este skill
-└── context/                ← archivos propios del usuario (prioridad)
+├── site-profile.md         ← generado por este skill
+└── user-context/           ← archivos propios del usuario (prioridad)
     ├── marco-seo.md
     ├── brand-guidelines.md
     └── [cualquier .md]
@@ -306,9 +306,9 @@ $SEO_REPORTS_PATH/{dominio}/
 ## Cómo leen el contexto los demás skills
 
 ```
-1. Verificar si existe $SEO_REPORTS_PATH/{dominio}/context.md → leerlo
-2. Verificar si existe $SEO_REPORTS_PATH/{dominio}/context/*.md → leerlos (prioridad sobre context.md)
-3. Si no existe → sugerir: "/webmometro-seo context {dominio}"
+1. Verificar si existe $SEO_REPORTS_PATH/{dominio}/user-context/*.md → leerlos (prioridad)
+2. Verificar si existe $SEO_REPORTS_PATH/{dominio}/site-profile.md → leerlo
+3. Si no existe → sugerir: "/webmometro-seo-site-profile {dominio}"
 ```
 
 ## Política de errores de MCP
