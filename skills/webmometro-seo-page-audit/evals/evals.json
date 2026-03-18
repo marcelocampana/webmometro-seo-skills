@@ -1,0 +1,23 @@
+{
+  "skill_name": "webmometro-page-audit",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Audita la página https://clinicadrazaror.cl/tratamientos/hifu-12d — quiero saber por qué no está rankeando mejor para 'hifu facial'",
+      "expected_output": "Reporte de auditoría de página guardado en reports/clinicadrazaror.cl/audits/. Debe incluir: datos GSC de la URL, análisis on-page (title, H1, meta, headings con texto literal), score PageSpeed mobile y desktop, análisis SERP para 'hifu facial', detección de canibalización si existe, plan de acción priorizado con impacto estimado en clicks.",
+      "files": ["reports/clinicadrazaror.cl/context.md"]
+    },
+    {
+      "id": 2,
+      "prompt": "Revisar la sección de Performance del último reporte de clinicadrazaror.cl/tratamientos/hifu-12d — el PageSpeed cambió después de que actualizamos las imágenes",
+      "expected_output": "El skill detecta el reporte existente reciente, pregunta al usuario confirmando que quiere actualizar solo la sección 4 (Performance), ejecuta solo PageSpeed para esa URL y actualiza únicamente esa sección en el archivo existente preservando el resto.",
+      "files": ["reports/clinicadrazaror.cl/context.md"]
+    },
+    {
+      "id": 3,
+      "prompt": "Necesito auditar todo el sitio clinicadrazaror.cl, hay varias páginas que no están rankeando bien",
+      "expected_output": "El skill detecta que es una solicitud de auditoría del sitio completo y deriva al usuario hacia webmometro-seo-context, explicando que ese skill es el adecuado para auditorías completas del dominio. NO inicia ningún análisis de página individual.",
+      "files": []
+    }
+  ]
+}

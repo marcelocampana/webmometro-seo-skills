@@ -1,5 +1,5 @@
 # Contexto del Negocio: clinicadrazaror.cl
-**Generado**: 2026-03-17 | **Última actualización**: 2026-03-17
+**Generado**: 2026-03-17 | **Última actualización**: 2026-03-17 (secciones 9 y 10 agregadas)
 
 ## El negocio
 **Descripción**: Clínica de medicina estética en Chile, liderada por la Dra. Zaror. Especializada en tratamientos no quirúrgicos con tecnología avanzada: láser CO2 fraccionado, HIFU 12D, endolaser corporal, sculptra, hilos tensores, blefaroplastia sin cirugía y carboxiterapia.
@@ -158,6 +158,30 @@ Clínica liderada por médico especialista (Dra. Zaror) con foco en tecnología 
 | clínica dra. zaror | 28 | 207 | 13.5% | 1.0 | Nav |
 | hifu 12d facial | 26 | 889 | 2.9% | 5.2 | Trans/Info |
 | aumento de gluteos con acido hialuronico | 25 | 826 | 3.0% | 16.5 | Info |
+
+## Páginas con mayor potencial de crecimiento
+*Páginas en posición 4-20 con volumen de impresiones significativo — subir a top 3 generaría un salto real de clicks.*
+
+| Página · *keyword* | Métricas | Recomendación |
+|---|---|---|
+| /tratamientos/esteticos/hifu-12d<br>*hifu facial* | pos 13.8 · 9,613 imp · CTR 2.0% → ~10% top 3 | La página está optimizada para "hifu 12d" (término de marca) pero la keyword con más impresiones es "hifu facial" (genérica). Agregar H2 explícito "¿Qué es el HIFU facial?" y contenido que capture la búsqueda genérica sin abandonar el diferencial 12D |
+| /blog/hifu-12d-opiniones-...<br>*hifu 12d* | pos 4.4 · 12,170 imp · CTR 1.1% → ~10% top 3 | CTR de 1.1% con 12,170 impresiones es bajo para pos 4.4 — el title/meta no genera urgencia de click. Reescribir title con beneficio concreto: "HIFU 12D: qué esperar, resultados reales y opiniones verificadas" |
+| /blog/presoterapia-...<br>*presoterapia* | pos 11.1 · 9,978 imp · CTR 0.3% → ~10% top 3 | CTR de 0.3% con casi 10,000 impresiones indica que el snippet no convence. Reescribir meta description con gancho de beneficio inmediato + agregar FAQ estructurada para capturar PAA |
+| /tratamientos/esteticos/bioestimulacion-sculptra<br>*sculptra* | pos 9.8 · 7,286 imp · CTR 1.2% → ~10% top 3 | Mayor potencial absoluto en primera página: subir a pos 5 ya duplicaría clicks actuales. Reforzar H1 con "Sculptra en Chile", agregar sección de precios orientativos y testimonios |
+| /tratamientos/esteticos/hilos-tensores<br>*hilos tensores* | pos 14.0 · 6,321 imp · CTR 1.1% → ~10% top 3 | Página 2 con keyword de 1,900 búsquedas/mes. Agregar comparativa "hilos tensores vs otros métodos de tensado", sección de candidatos ideales y preguntas frecuentes |
+| /tratamientos/corporales/aumento-de-gluteos-...<br>*ácido hialurónico en glúteos* | pos 12.3 · 4,915 imp · CTR 4.4% → ~10% top 3 | CTR bueno para pos 12 — el snippet convence, el problema es la posición. Agregar contenido sobre duración, número de sesiones y precios para reforzar autoridad temática |
+| /tratamientos/.../megadosis-endovevenosa-vitamina-c<br>*vitamina C endovenosa* | pos 8.7 · 2,661 imp · CTR 2.1% → ~10% top 3 | Agregar protocolo de tratamiento, frecuencia recomendada y diferencia con suplemento oral — contenido que los competidores informativos no tienen desde perspectiva clínica |
+
+## Páginas en caída recuperable
+*Páginas con impresiones sostenidas pero CTR muy bajo y posición > 10 — Google las indexa pero ya no las prefiere. Señal de contenido desactualizado o superado por competidores.*
+
+| Página · *keyword* | Métricas | Diagnóstico y acción |
+|---|---|---|
+| /blog/presoterapia-...<br>*presoterapia* | pos 11.1 · 9,978 imp · CTR 0.3% | Alto volumen sostenido indica relevancia temática — Google la considera pero el contenido no cierra la intención. Probablemente superado por artículos más completos. → Reescribir con estructura definitiva: qué es → cómo funciona → beneficios con evidencia → tipos de aparatos → precios en Chile → contraindicaciones. Agregar fecha de actualización visible |
+| /tratamientos/esteticos/hilos-tensores<br>*hilos tensores* | pos 14.0 · 6,321 imp · CTR 1.1% | Keyword de 1,900 búsquedas/mes donde la clínica tiene el tratamiento pero no domina el SERP. Competidores con más contenido informacional ganan autoridad. → Expandir con tipos de hilos (PDO, PLLA, PCL), zonas, duración y recuperación. Consolidar si hay otra URL que canibalice |
+| /blog/todo-sobre-la-radiofrecuencia-...<br>*radiofrecuencia* | pos 2.7 · 4,602 imp · CTR 0.2% | Pos top 3 pero CTR de 0.2% — señal de featured snippet que muestra el contenido sin generar click. → Revisar si existe snippet que "roba" el tráfico. Reescribir title para diferenciarse: "Radiofrecuencia facial: beneficios reales, tipos y qué esperar en la clínica" |
+| /tratamientos/esteticos/bioestimulacion-lanluma<br>*lanluma* | pos 18.3 · 1,586 imp · CTR 1.0% | Nicho con poca competencia local pero la página no logra posicionarse — posible falta de profundidad de contenido. → Crear contenido de referencia: Lanluma vs Sculptra, protocolo, zonas, resultados. Agregar imagen antes/después con alt text descriptivo |
+| /tratamientos/esteticos/bioestimulacion-harmonyca<br>*harmonyca* | pos 18.3 · 1,291 imp · CTR 1.3% | Mismo patrón que Lanluma: término específico con baja competencia local pero posición baja. → Expandir con mecanismo de acción combinado (HA + CaHA), diferencial vs rellenos convencionales y FAQ con preguntas PAA del SERP |
 
 ## Notas técnicas
 - **CMS**: No detectado (desplegado en Vercel)

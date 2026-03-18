@@ -19,7 +19,18 @@
       "mcp__dataforseo__labs_google_domain_rank_overview",
       "mcp__dataforseo__backlinks_summary",
       "mcp__dataforseo__labs_google_ranked_keywords",
-      "Read(//Users/marcelocampana/.claude/skills/webmometro-seo-context/**)"
+      "Read(//Users/marcelocampana/.claude/skills/webmometro-seo-context/**)",
+      "WebFetch(domain:www.observatoriodelcancer.cl)",
+      "mcp__dataforseo__labs_google_keywords_for_site",
+      "Bash(python3 -c \":*)",
+      "mcp__chrome-devtools__new_page",
+      "mcp__chrome-devtools__evaluate_script",
+      "mcp__chrome-devtools__wait_for",
+      "mcp__chrome-devtools__navigate_page",
+      "mcp__chrome-devtools__lighthouse_audit",
+      "Read(//Users/marcelocampana/.claude/skills/seo-audit/**)",
+      "Bash(npm show:*)",
+      "Read(//Users/marcelocampana/Projects/mcps/**)"
     ],
     "additionalDirectories": [
       "/tmp",
