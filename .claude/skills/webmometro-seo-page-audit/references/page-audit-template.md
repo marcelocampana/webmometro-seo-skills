@@ -105,11 +105,21 @@ H1: {texto}
 | Fuentes citadas | ✅ / ❌ / N/A | {cuántas, qué tipo} |
 | CTA | ✅ / ❌ | {texto del CTA o ausente} |
 
+**Comportamiento de usuario (Clarity)** *(omitir si no hay datos)*:
+
+| Métrica | Valor | Interpretación |
+|---|---|---|
+| Quick backs | {N}% | ✅ <20% / ⚠️ 20–40% / ❌ >40% — {intención satisfecha o no} |
+| Scroll depth promedio | {N}% | ✅ >70% / ⚠️ 50–70% / ❌ <50% — {estructura o relevancia} |
+| Rage clicks | {N sesiones} | ✅ ninguno / ⚠️ / ❌ — zona: {descripción} |
+| Dead clicks | {N sesiones} | ✅ ninguno / ⚠️ / ❌ — elemento: {descripción} |
+| Duración promedio (sesiones orgánicas) | {Xm Xs} | ✅ / ⚠️ / ❌ — {engagement con el contenido} |
+
 **Hallazgos**:
 
 | Hallazgo | Detalle | Prioridad |
 |---|---|---|
-| {señal E-E-A-T} | {qué falta o qué está mal} | High / Medium / Low |
+| {señal E-E-A-T o Clarity} | {qué falta o qué está mal} | High / Medium / Low |
 
 ---
 

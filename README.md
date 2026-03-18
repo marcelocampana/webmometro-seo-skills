@@ -126,39 +126,105 @@ Para ver todos los comandos disponibles:
 
 ---
 
-## MCP servers requeridos
+## Configuración post-instalación
 
-Los skills usan los siguientes MCP servers. Configúralos en tu `~/.claude/mcp.json`:
+Luego de instalar los skills, hay tres configuraciones adicionales necesarias para que funcionen correctamente.
 
-| MCP | Propósito |
-|---|---|
-| `dataforseo` | SERP, keywords, backlinks, OnPage, labs, domain analytics |
-| `gsc` | Google Search Console (search analytics, quick wins, sitemaps) |
-| `pagespeed` | Core Web Vitals vía Google PageSpeed Insights API |
-| `chrome-devtools` | Screenshots de competidores, DOM renderizado |
-| `context7` | Documentación actualizada de librerías |
-| `nuxt-ui-remote` | Componentes Nuxt UI (si el stack del cliente es Nuxt) |
-| `analytics-mcp` | Google Analytics 4 (para skills de KPIs) |
-| `clarity-{proyecto}` | Microsoft Clarity — sesiones, heatmaps, comportamiento de usuario |
+---
 
-### Selección automática del MCP de Microsoft Clarity
+### 1. Configurar los MCP servers
 
-Los MCPs de Clarity siguen el patrón `clarity-{nombre-proyecto}`. Cualquier skill que use Clarity debe seleccionar el MCP correcto automáticamente:
+El repositorio incluye dos archivos de ejemplo que cubren toda la configuración necesaria:
 
-1. Extrae el dominio de la URL analizada (ej: `bradfordhill.cl`)
-2. Normaliza: minúsculas, sin tildes, espacios → guiones (ej: `bradford-hill`)
-3. Usa el MCP cuyo nombre contenga ese fragmento (ej: `clarity-bradford-hill`)
-4. Si no hay match, confirma con el usuario
-5. Si no existe MCP de Clarity para ese dominio, omite la integración sin error
+- **`.mcp.json.example`** — estructura completa de MCPs con placeholders para paths y credenciales
+- **`.env.example`** — todas las variables de entorno requeridas con descripción de cada una
+
+**Paso 1 — Copia los archivos de ejemplo:**
+
+```bash
+cp .mcp.json.example .mcp.json
+cp .env.example .env
+```
+
+**Paso 2 — Edita `.mcp.json`** reemplazando los paths `/ruta/a/...` con las rutas reales en tu máquina.
+
+**Paso 3 — Edita `.env`** con tus credenciales reales. Cada variable está comentada con su origen.
+
+> `.env` y `.mcp.json` están en `.gitignore` — nunca se commitean.
+
+**Resumen de MCPs y sus fuentes de credenciales:**
+
+| MCP | Configurado en | Credenciales |
+|---|---|---|
+| `dataforseo` | `.mcp.json` del proyecto | `DATAFORSEO_LOGIN` + `DATAFORSEO_PASSWORD` en `.env` |
+| `gsc` | `.mcp.json` del proyecto | `GSC_CREDENTIALS` (path al JSON) en `.env` |
+| `pagespeed` | `.mcp.json` del proyecto | `PAGESPEED_API_KEY` en `.env` |
+| `analytics-mcp` | `.mcp.json` del proyecto | `GOOGLE_APPLICATION_CREDENTIALS` en `.env` |
+| `chrome-devtools` | Global o proyecto | Sin credenciales |
+| `clarity-{proyecto}` | `.mcp.json` del proyecto | `CLARITY_TOKEN_{PROYECTO}` en `.env` |
+| `context7` | Global o proyecto | API key en args |
+
+> Los nombres de MCP en esta tabla son los nombres exactos que los skills esperan. Usar un nombre distinto hará que el skill no lo reconozca.
+
+---
+
+### 2. Configurar los MCP de Microsoft Clarity
+
+Si usas Microsoft Clarity, cada proyecto/cliente necesita su propio MCP. El nombre **debe seguir el patrón `clarity-{nombre-proyecto}`**, donde `{nombre-proyecto}` es un identificador legible que tú eliges — no es el dominio ni se deriva automáticamente de él.
+
+**Ejemplos correctos:**
+- Dominio `bradfordhill.cl` → MCP llamado `clarity-bradford-hill`
+- Dominio `observatoriodelcancer.cl` → MCP llamado `clarity-observatorio-del-cancer`
+- Dominio `clinicadrazaror.cl` → MCP llamado `clarity-clinica-dra-zaror`
+
+El skill identifica el MCP correcto por similitud semántica al nombre del negocio, no por match exacto con el dominio. Si el nombre que eliges es razonablemente descriptivo, el skill lo encontrará.
+
+---
+
+### 3. Configurar la ruta de reportes (`SEO_REPORTS_PATH`)
+
+Los reportes y contextos se almacenan en una carpeta configurable. La ruta se resuelve así:
+
+1. Si `$SEO_REPORTS_PATH` está definida en `.claude/settings.json` → se usa esa ruta
+2. Si no está definida → se usa `{cwd}/reports` (directorio actual del proyecto) y se advierte al usuario
+
+El directorio se crea automáticamente si no existe.
+
+Para configurar una ruta personalizada, agrega en `.claude/settings.json`:
+
+```json
+{
+  "env": {
+    "SEO_REPORTS_PATH": "/ruta/a/tu/carpeta/reports"
+  }
+}
+```
 
 ---
 
 ## Sistema de contexto del negocio
 
-Cada skill verifica si existe `reports/{dominio}/context.md` antes de correr. Si existe, lo lee y adapta sus recomendaciones al negocio.
+Los reportes y contextos se almacenan en una carpeta configurable. La ruta se resuelve así:
+
+1. Si `$SEO_REPORTS_PATH` está definida en `.claude/settings.json` → se usa esa ruta
+2. Si no está definida → se usa `{cwd}/reports` (directorio actual del proyecto) y se advierte al usuario
+
+El directorio se crea automáticamente si no existe.
+
+Para configurar una ruta personalizada, agrega en `.claude/settings.json`:
+
+```json
+{
+  "env": {
+    "SEO_REPORTS_PATH": "/ruta/a/tu/carpeta/reports"
+  }
+}
+```
+
+Cada skill verifica si existe `$SEO_REPORTS_PATH/{dominio}/context.md` antes de correr. Si existe, lo lee y adapta sus recomendaciones al negocio.
 
 Para agregar tu propio contexto personalizado:
-- Crea archivos `.md` en `reports/{dominio}/context/`
+- Crea archivos `.md` en `$SEO_REPORTS_PATH/{dominio}/context/`
 - Ejemplos: `marco-seo.md`, `brand-guidelines.md`, `audiencia-objetivo.md`
 - Los archivos en `context/` tienen **prioridad** sobre el `context.md` generado automáticamente
 

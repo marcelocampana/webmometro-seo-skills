@@ -24,9 +24,23 @@ Genera el perfil del negocio para un dominio. Todos los skills webmometro-seo lo
 /webmometro-seo context [dominio]
 ```
 
+## Configuración de ruta de reportes
+
+Al iniciar, resolver la ruta base de reportes:
+
+- Si `$SEO_REPORTS_PATH` está definida → usar ese valor como `REPORTS_DIR`
+- Si no está definida → usar `{cwd}/reports` como `REPORTS_DIR` y advertir al usuario:
+  > "No encontré `SEO_REPORTS_PATH`. Guardando reportes en `{cwd}/reports`. Para usar otra ubicación, define `SEO_REPORTS_PATH` en `.claude/settings.json`."
+
+Si `REPORTS_DIR` no existe, crearlo con `mkdir -p` antes de continuar.
+
+Todas las referencias a `$SEO_REPORTS_PATH` en este skill se resuelven como `REPORTS_DIR`.
+
+---
+
 ## Manejo de contexto existente
 
-Antes de iniciar, verificar si ya existe `reports/{dominio}/context.md`:
+Antes de iniciar, verificar si ya existe `$SEO_REPORTS_PATH/{dominio}/context.md`:
 
 - **Si no existe**: ejecutar el flujo completo sin preguntar nada.
 
@@ -260,7 +274,7 @@ Volumen total: [X]/mes → [veredicto]
 
 ### Paso 5 — Guardado
 
-Incorpora correcciones y guarda en `reports/{dominio}/context.md` usando el template en `references/context-template.md`.
+Incorpora correcciones y guarda en `$SEO_REPORTS_PATH/{dominio}/context.md` usando el template en `references/context-template.md`.
 
 **Campos obligatorios a completar al guardar:**
 - `{date}` en "Generado" y "Última actualización" → usar la fecha actual (formato: YYYY-MM-DD)
@@ -276,12 +290,12 @@ Incorpora correcciones y guarda en `reports/{dominio}/context.md` usando el temp
 - **Notas técnicas**: onpage_score, issues detectados, CMS detectado. Si OnPage no estuvo disponible, registrar: "OnPage no disponible al momento de la generación — ejecutar `onpage_task_get` manualmente con task_id: {id}".
 
 Al finalizar informar:
-> "Contexto guardado en `reports/{dominio}/context.md`. Si tienes pautas internas, marcos SEO o guías de marca, agrégalos como archivos `.md` en `reports/{dominio}/context/` — los skills los leerán automáticamente con prioridad sobre este archivo."
+> "Contexto guardado en `$SEO_REPORTS_PATH/{dominio}/context.md`. Si tienes pautas internas, marcos SEO o guías de marca, agrégalos como archivos `.md` en `$SEO_REPORTS_PATH/{dominio}/context/` — los skills los leerán automáticamente con prioridad sobre este archivo."
 
 ## Estructura de archivos
 
 ```
-reports/{dominio}/
+$SEO_REPORTS_PATH/{dominio}/
 ├── context.md              ← generado por este skill
 └── context/                ← archivos propios del usuario (prioridad)
     ├── marco-seo.md
@@ -292,10 +306,36 @@ reports/{dominio}/
 ## Cómo leen el contexto los demás skills
 
 ```
-1. Verificar si existe reports/{dominio}/context.md → leerlo
-2. Verificar si existe reports/{dominio}/context/*.md → leerlos (prioridad sobre context.md)
+1. Verificar si existe $SEO_REPORTS_PATH/{dominio}/context.md → leerlo
+2. Verificar si existe $SEO_REPORTS_PATH/{dominio}/context/*.md → leerlos (prioridad sobre context.md)
 3. Si no existe → sugerir: "/webmometro-seo context {dominio}"
 ```
+
+## Política de errores de MCP
+
+Si un MCP falla, no está disponible, o no retorna datos, **nunca omitir silenciosamente**. En todos los casos:
+
+1. Continuar con los demás pasos sin interrumpir el flujo
+2. En la sección correspondiente del contexto generado, registrar:
+
+```
+> ⚠️ **Datos no disponibles** — {nombre del MCP} no respondió o no está instalado.
+> Sin estos datos, {descripción del valor que aportaría}.
+> Para obtener esta información, instala o verifica la configuración de `{nombre-mcp}`.
+```
+
+Referencia por MCP y sección afectada:
+
+| MCP | Sección afectada | Valor que aportaría si estuviera activo |
+|---|---|---|
+| `dataforseo` (OnPage) | Notas técnicas | OnPage score, issues, CMS detectado, title/meta/H1 reales |
+| `dataforseo` (competitors) | Competidores SERP | Dominios que compiten orgánicamente según Google |
+| `dataforseo` (categories) | El negocio | Categoría de industria inferida por Google |
+| `dataforseo` (SERP) | Competidores SERP, Peers | Dominios orgánicos reales en SERPs relevantes |
+| `dataforseo` (search volume) | Viabilidad de demanda | Volumen mensual de búsqueda de keywords objetivo |
+| `gsc` | Keywords prioritarias, Páginas con potencial, Páginas en caída | Clicks, impresiones, CTR, posición real de keywords y páginas |
+
+---
 
 ## Template de reporte
 

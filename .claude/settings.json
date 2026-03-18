@@ -1,4 +1,7 @@
 {
+  "env": {
+    "SEO_REPORTS_PATH": "/Users/marcelocampana/Documents/Work/Webmometro/seo-projects/reports"
+  },
   "permissions": {
     "allow": [
       "Bash(grep -r \"references/\" /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-seo-*/SKILL.md)",
@@ -33,7 +36,20 @@
       "Read(//Users/marcelocampana/Projects/mcps/**)",
       "mcp__clarity-observatorio-del-cancer__query-analytics-dashboard",
       "mcp__clarity-clinica-dra-zaror__query-analytics-dashboard",
-      "mcp__clarity-bradford-hill__query-analytics-dashboard"
+      "mcp__clarity-bradford-hill__query-analytics-dashboard",
+      "Read(//Users/marcelocampana/Projects/**)",
+      "Bash(npx skills:*)",
+      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-seo-page-audit/SKILL.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-page-audit/SKILL.md)",
+      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-seo-page-audit/references/page-audit-template.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-page-audit/references/page-audit-template.md)",
+      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-seo-site-audit/SKILL.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-site-audit/SKILL.md)",
+      "Read(//Users/marcelocampana/.local/pipx/venvs/analytics-mcp/bin/**)",
+      "Bash(/Users/marcelocampana/Projects/webmometro-seo-skills/.env:*)",
+      "Bash(/Users/marcelocampana/Projects/webmometro-seo-skills/.mcp/dataforseo.sh:*)",
+      "Bash(chmod +x /Users/marcelocampana/Projects/webmometro-seo-skills/.mcp/dataforseo.sh)",
+      "Bash(__NEW_LINE_53b324fb802c17e7__ cat:*)",
+      "Bash(/Users/marcelocampana/Projects/webmometro-seo-skills/.mcp/gsc.sh:*)",
+      "Bash(chmod +x /Users/marcelocampana/Projects/webmometro-seo-skills/.mcp/gsc.sh)",
+      "Bash(/Users/marcelocampana/Projects/webmometro-seo-skills/.env.example:*)"
     ],
     "additionalDirectories": [
       "/tmp",
