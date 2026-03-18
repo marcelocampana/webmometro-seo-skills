@@ -221,6 +221,8 @@ $SEO_REPORTS_PATH/{dominio}/opportunities/{fecha}-opportunity-{slug}.md
 ```
 Donde `{slug}` = keyword candidata principal en kebab-case (ej: `hilos-tensores-pdo`).
 
+Generar el reporte usando el template en `references/opportunity-template.md`. Leer el template antes de generar el reporte para mantener consistencia de estructura entre ejecuciones.
+
 ### Estructura del reporte
 
 ```
