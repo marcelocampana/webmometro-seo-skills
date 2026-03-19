@@ -1,0 +1,32 @@
+{
+  "mcpServers": {
+    "dataforseo": {
+      "command": "/Users/marcelocampana/Projects/webmometro-seo-skills/.mcp/dataforseo.sh",
+      "args": []
+    },
+    "gsc": {
+      "command": "/Users/marcelocampana/Projects/webmometro-seo-skills/.mcp/gsc.sh",
+      "args": []
+    },
+    "pagespeed": {
+      "command": "/Users/marcelocampana/Projects/webmometro-seo-skills/.mcp/pagespeed.sh",
+      "args": []
+    },
+    "analytics-mcp": {
+      "command": "/Users/marcelocampana/Projects/webmometro-seo-skills/.mcp/analytics-mcp.sh",
+      "args": []
+    },
+    "clarity-observatorio-del-cancer": {
+      "command": "/Users/marcelocampana/Projects/webmometro-seo-skills/.mcp/clarity-observatorio-del-cancer.sh",
+      "args": []
+    },
+    "clarity-clinica-dra-zaror": {
+      "command": "/Users/marcelocampana/Projects/webmometro-seo-skills/.mcp/clarity-clinica-dra-zaror.sh",
+      "args": []
+    },
+    "clarity-bradford-hill": {
+      "command": "/Users/marcelocampana/Projects/webmometro-seo-skills/.mcp/clarity-bradford-hill.sh",
+      "args": []
+    }
+  }
+}
