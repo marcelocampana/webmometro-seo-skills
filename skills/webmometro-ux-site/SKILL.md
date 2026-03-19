@@ -62,9 +62,10 @@ Si existe un reporte con **menos de 15 días** desde hoy:
 > 2. Páginas con mayor frustración
 > 3. Engagement por página
 > 4. Flujos de navegación y puntos de salida
-> 5. Performance técnica (CWV)
-> 6. Errores JavaScript
-> 7. Plan de acción"
+> 5. Navegación desde páginas distribuidoras (clics del menú)
+> 6. Performance técnica (CWV)
+> 7. Errores JavaScript
+> 8. Plan de acción"
 
 Si el usuario responde con números, ejecutar solo los pasos necesarios y actualizar esas secciones en el archivo existente. Si el reporte tiene **15 días o más**, o no existe → ejecutar el flujo completo.
 
@@ -218,6 +219,47 @@ Registrar:
 - Calidad por canal: qué canales traen usuarios más engaged (menor bounce, mayor duración)
 - Top páginas de salida: URL + tasa de salida — identificar páginas donde los usuarios abandonan el sitio
 
+### Paso 4.5 — Navegación desde páginas distribuidoras
+
+Identificar las **5 páginas más visitadas** del sitio a partir de los datos del Paso 2 (GA4, top por sesiones). Para cada una de estas páginas, analizar si está funcionando como distribuidor de tráfico efectivo hacia el resto del sitio.
+
+**Solo si `clarity_mcp` fue identificado.** Ejecutar una consulta por cada una de las top 5 páginas:
+
+```
+{clarity_mcp}__query-analytics-dashboard →
+  "Top URLs clicadas desde {URL_página_1} en desktop y mobile, últimos 30 días"
+
+{clarity_mcp}__query-analytics-dashboard →
+  "Top URLs clicadas desde {URL_página_2} en desktop y mobile, últimos 30 días"
+
+... (repetir para las 5 páginas)
+```
+
+**Importante**: ejecutar estas consultas de a máximo 3 en paralelo para evitar errores de rate limit.
+
+Cruzar con los datos de sesiones de GA4 del Paso 2: para cada URL de destino que aparece en los clics de Clarity, verificar su engagement (bounce, duración) en la tabla de páginas ya obtenida.
+
+Registrar para cada página distribuidora:
+
+```
+### {URL página distribuidora} — distribución de clics de navegación
+
+| Destino | Clics desktop | Clics mobile | Sesiones GA4 | Bounce GA4 | Diagnóstico |
+|---|---|---|---|---|---|
+| {url} | {n} | {n} | {n} | {%} | {emoji} |
+```
+
+Diagnóstico por fila:
+- Clics altos + bounce bajo → ✅ Enlace efectivo — genera interés y la página destino lo sostiene
+- Clics altos + bounce alto → 🟠 El enlace capta interés pero la página destino no cumple la expectativa
+- Clics bajos en mobile vs desktop → 🔴 Enlace no visible o accesible en mobile
+- Clics muy bajos en ambos dispositivos → 🟡 Sección del menú con bajo interés — evaluar si el label comunica el valor correctamente
+
+Al final de este paso, sintetizar:
+- ¿Qué secciones del menú/navegación generan más tráfico interno?
+- ¿Hay asimetría relevante entre mobile y desktop en algún destino clave?
+- ¿Alguna página importante del sitio recibe pocos clics de navegación interna pero tiene buen engagement cuando llegan usuarios? → oportunidad de mejorar su visibilidad en el menú
+
 ### Paso 5 — Performance técnica (CWV)
 
 ```
@@ -285,9 +327,10 @@ Guardar en: `$SEO_REPORTS_PATH/{dominio}/ux/ux-site-{fecha}.md`
 | 2. Páginas con mayor frustración | Paso 3 |
 | 3. Engagement por página | Paso 2 |
 | 4. Flujos de navegación | Paso 4 |
-| 5. Performance técnica | Paso 5 |
-| 6. Errores JavaScript | Paso 6 |
-| 7. Plan de acción | Requiere datos actuales — reejecutar pasos relevantes |
+| 5. Navegación desde páginas distribuidoras | Paso 4.5 (requiere Paso 2 para top 5 páginas) |
+| 6. Performance técnica | Paso 5 |
+| 7. Errores JavaScript | Paso 6 |
+| 8. Plan de acción | Requiere datos actuales — reejecutar pasos relevantes |
 
 ---
 
@@ -297,7 +340,7 @@ Guardar en: `$SEO_REPORTS_PATH/{dominio}/ux/ux-site-{fecha}.md`
 |---|---|---|
 | `mcp__analytics-mcp__get_account_summaries` | 0.6 | Siempre — identificar propiedad GA4 |
 | `mcp__analytics-mcp__run_report` | 1, 2, 4 | Si ga4_property fue identificado |
-| `{clarity_mcp}__query-analytics-dashboard` | 2, 3, 5, 6 | Si clarity_mcp fue identificado |
+| `{clarity_mcp}__query-analytics-dashboard` | 2, 3, 4.5, 5, 6 | Si clarity_mcp fue identificado |
 | `mcp__pagespeed__analyze_pagespeed` | 5 | Siempre |
 
 ---

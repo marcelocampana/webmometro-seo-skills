@@ -65,8 +65,9 @@ Si existe un reporte con **menos de 15 días** desde hoy:
 > 1. Comportamiento Clarity (rage/dead clicks, quick backs, scroll)
 > 2. Engagement GA4 (sesiones, bounce, duración)
 > 3. Performance CWV
-> 4. Comparativa mobile vs desktop
-> 5. Hallazgos y recomendaciones"
+> 4. Navegación desde esta página (clics del menú)
+> 5. Comparativa mobile vs desktop
+> 6. Hallazgos y recomendaciones"
 
 Si el usuario responde con números, ejecutar solo los pasos necesarios y actualizar esas secciones. Si el reporte tiene **15 días o más**, o no existe → ejecutar el flujo completo.
 
@@ -78,8 +79,8 @@ Si el usuario responde con números, ejecutar solo los pasos necesarios y actual
 
 Verificar si existe `$SEO_REPORTS_PATH/{dominio}/site-profile.md`:
 
-- **Si existe**: leerlo. Extraer: tipo de negocio, objetivo principal del sitio, audiencias. Este contexto permite interpretar si el comportamiento observado en la página es esperable dado el tipo de contenido y audiencia.
-- **Si no existe**: continuar sin él y advertir:
+- **Si existe**: leerlo. Extraer: tipo de negocio, objetivo principal del sitio, audiencias. Además, buscar la tabla de top páginas más visitadas (habitualmente bajo "Top páginas orgánicas" o similar) y verificar si la URL analizada está entre las **5 primeras**. Si está → `nav_analysis = true`. Si no está → `nav_analysis = false`.
+- **Si no existe**: continuar sin él, `nav_analysis = false`, y advertir:
   > "No encontré el perfil del negocio para `{dominio}`. El análisis será genérico. Para obtener hallazgos contextualizados, genera el perfil con `/webmometro-seo-site-profile {dominio}`."
 
 Derivar el `{slug}` de la URL: usar el último segmento del path (ej: `/blog/cancer-de-mama` → `cancer-de-mama`, `/` → `home`).
@@ -199,6 +200,51 @@ Si los valores de CWV de campo están disponibles (no "N/A"), registrar también
 
 Si son "N/A", anotar en el informe y usar como referencia los valores de Clarity si están disponibles.
 
+### Paso 3.5 — Navegación desde esta página (solo si `nav_analysis = true`)
+
+**Solo ejecutar si la página analizada está en el TOP 5 de páginas más visitadas según el site-profile.**
+
+Esta página actúa como distribuidor de tráfico. El objetivo es entender si los enlaces de navegación (menú principal, CTAs del hero, secciones de acceso rápido) están captando el interés esperado y si ese interés se convierte en navegación real.
+
+**Clarity** — si `clarity_mcp` disponible, ejecutar en paralelo:
+
+```
+{clarity_mcp}__query-analytics-dashboard →
+  "Top URLs clicadas desde {URL} en desktop, últimos 30 días"
+
+{clarity_mcp}__query-analytics-dashboard →
+  "Top URLs clicadas desde {URL} en mobile, últimos 30 días"
+```
+
+**GA4** — si `ga4_property` disponible, en tanda separada:
+
+```
+mcp__analytics-mcp__run_report →
+  property_id: ga4_property_id
+  dimensions: ["pagePath"]
+  metrics: ["sessions", "bounceRate", "averageSessionDuration"]
+  date_ranges: [{"start_date": "30daysAgo", "end_date": "yesterday"}]
+  order_bys: [{"metric": {"metric_name": "sessions"}, "desc": true}]
+  limit: 10
+```
+
+Cruzar: para cada URL que aparece en los clics de Clarity, buscar su engagement en GA4.
+
+Registrar en tabla:
+
+| Destino | Clics desde {slug} (desktop) | Clics desde {slug} (mobile) | Sesiones GA4 | Bounce GA4 | Diagnóstico |
+|---|---|---|---|---|---|
+| {url} | {n} | {n} | {n} | {%} | {emoji + nota} |
+
+Diagnóstico por fila:
+- Clics altos + bounce bajo → ✅ El enlace capta interés real y la página destino lo sostiene
+- Clics altos + bounce alto → 🟠 El enlace genera interés pero la página destino defrauda
+- Clics bajos en mobile vs desktop → 🔴 El enlace no es visible o accesible en mobile
+- URL sin clics desde esta página pero con tráfico en GA4 → 🟡 Llegan por otra vía, no desde la navegación de esta página
+
+> [!note] Nota metodológica
+> Los clics de Clarity corresponden a interacciones registradas en los heatmaps de la página. GA4 muestra el engagement total de cada página destino, no solo las sesiones provenientes de esta página — se usa como indicador de si la página destino retiene a los usuarios que llegan, independientemente del origen.
+
 ### Paso 4 — Comparativa mobile vs desktop
 
 Con los datos del Paso 2 y Paso 3, comparar:
@@ -245,8 +291,9 @@ Guardar en: `$SEO_REPORTS_PATH/{dominio}/ux/ux-page-{slug}-{fecha}.md`
 | 1. Comportamiento Clarity | Paso 1 |
 | 2. Engagement GA4 | Paso 2 |
 | 3. Performance CWV | Paso 3 |
-| 4. Comparativa mobile vs desktop | Pasos 2, 3 y (si clarity disponible) parte del Paso 4 |
-| 5. Hallazgos y recomendaciones | Requiere datos actuales — reejecutar pasos relevantes |
+| 4. Navegación desde esta página | Paso 3.5 (solo si nav_analysis = true) |
+| 5. Comparativa mobile vs desktop | Pasos 2, 3 y (si clarity disponible) parte del Paso 4 |
+| 6. Hallazgos y recomendaciones | Requiere datos actuales — reejecutar pasos relevantes |
 
 ---
 
@@ -255,8 +302,8 @@ Guardar en: `$SEO_REPORTS_PATH/{dominio}/ux/ux-page-{slug}-{fecha}.md`
 | Tool | Paso | Cuándo usar |
 |---|---|---|
 | `mcp__analytics-mcp__get_account_summaries` | 0.6 | Siempre — identificar propiedad GA4 |
-| `mcp__analytics-mcp__run_report` | 2 | Si ga4_property fue identificado |
-| `{clarity_mcp}__query-analytics-dashboard` | 1, 4 | Si clarity_mcp fue identificado |
+| `mcp__analytics-mcp__run_report` | 2, 3.5 | Si ga4_property fue identificado |
+| `{clarity_mcp}__query-analytics-dashboard` | 1, 3.5, 4 | Si clarity_mcp fue identificado |
 | `mcp__pagespeed__analyze_pagespeed` | 3 | Siempre — mobile + desktop |
 
 ---
