@@ -14,7 +14,7 @@ metadata:
   argument-hint: "[dominio]"
 ---
 
-# webmometro-seo-site-profile — Site Profile
+# webmometro-seo-site-audit — Contexto del Negocio
 
 Genera el perfil del negocio para un dominio. Todos los skills webmometro-seo lo leen automáticamente antes de cada análisis, permitiéndoles hacer recomendaciones contextualizadas al negocio en lugar de análisis genéricos.
 
@@ -40,7 +40,7 @@ Todas las referencias a `$SEO_REPORTS_PATH` en este skill se resuelven como `REP
 
 ## Manejo de contexto existente
 
-Antes de iniciar, verificar si ya existe `$SEO_REPORTS_PATH/{dominio}/site-profile.md`:
+Antes de iniciar, verificar si ya existe `$SEO_REPORTS_PATH/{dominio}/context.md`:
 
 - **Si no existe**: ejecutar el flujo completo sin preguntar nada.
 
@@ -50,36 +50,61 @@ Antes de iniciar, verificar si ya existe `$SEO_REPORTS_PATH/{dominio}/site-profi
 
   - **Si han pasado 15 días o menos**: el contexto es reciente — presumir que la mayoría de la información sigue vigente. Mostrar el mensaje siguiente y pedir al usuario que indique qué secciones actualizar anotando los números. Si responde "todo" o "A", ejecutar el flujo completo. Si no responde nada o dice que está bien, detener.
 
-  > "El site profile de `{dominio}` fue actualizado hace {N} días ({fecha}). La información es reciente — probablemente no necesita regenerarse por completo.
+  > "El contexto de `{dominio}` fue actualizado hace {N} días ({fecha}). La información es reciente — probablemente no necesita regenerarse por completo.
   >
   > Si quieres actualizar alguna sección específica, indica los números (ej: 3, 7). Puedes indicar varias. Para regenerar todo escribe **A**. Para cancelar escribe **C**.
   >
   > **Secciones disponibles:**
-  > 1. El negocio (descripción, objetivo, industria, ubicación, propuesta de valor)
+  > 1. El negocio (descripción, objetivo, industria)
   > 2. Audiencias y viabilidad de demanda
-  > 3. Tráfico GA4 — canales 30 días
-  > 4. Tráfico GA4 — canales 90 días
-  > 5. Tráfico GA4 — dispositivos (90 días)
-  > 6. Tráfico GA4 — top páginas orgánicas (90 días)
-  > 7. Competidores SERP
-  > 8. Peers organizacionales
-  > 9. Pilares de contenido
-  > 10. Tono y voz de marca
-  > 11. Keywords prioritarias GSC (top 20)
-  > 12. Páginas con mayor potencial de crecimiento
-  > 13. Páginas en caída recuperable
-  > 14. Notas técnicas (OnPage score, issues)
-  > 15. Notas estratégicas"
+  > 3. Propuesta de valor
+  > 4. Competidores SERP
+  > 5. Peers organizacionales
+  > 6. Pilares de contenido
+  > 7. Tono y voz de marca
+  > 8. Keywords prioritarias GSC (top 20)
+  > 9. Páginas con mayor potencial de crecimiento
+  > 10. Páginas en caída recuperable
+  > 11. Notas técnicas (OnPage score, issues)
+  > 12. Notas estratégicas"
 
   Al recibir los números, ejecutar **solo los pasos necesarios** para regenerar esas secciones, evitando llamadas a MCPs de pago para las secciones que no se actualizan. Mapeo orientativo de secciones a pasos:
-  - Sección 1: se puede actualizar con OnPage (Paso 1.1) o revisión del sitio.
-  - Sección 2 (audiencias + viabilidad): requiere Pasos 2 y 2b (keywords Google Ads API).
-  - Secciones 3, 4, 5, 6 (GA4): requiere Paso 1.7 (analytics-mcp) — sin costo adicional.
-  - Secciones 7, 8: requiere Paso 1.3 (competidores DataForSEO) y Paso 1.5 (SERPs).
-  - Sección 9: requiere keywords disponibles (GSC o DataForSEO).
-  - Secciones 11, 12, 13: requieren GSC (Paso 1.2, dimensiones query y page) — sin costo adicional.
-  - Sección 14: requiere OnPage (Paso 1.1).
-  - Secciones 10, 15: se pueden derivar de los datos ya disponibles en el archivo, sin llamadas externas.
+  - Secciones 1, 3, 7: se pueden actualizar con OnPage (Paso 1.1) o revisión del sitio.
+  - Secciones 2 (audiencias + viabilidad): requiere Pasos 2 y 2b (keywords Google Ads API).
+  - Secciones 4, 5: requiere Paso 1.3 (competidores DataForSEO) y Paso 1.5 (SERPs).
+  - Secciones 6: requiere keywords disponibles (GSC o DataForSEO).
+  - Secciones 8, 9, 10: requieren GSC (Paso 1.2, dimensiones query y page) — sin costo adicional.
+  - Sección 11: requiere OnPage (Paso 1.1).
+  - Sección 12: se puede derivar de los datos ya disponibles en el archivo, sin llamadas externas.
+
+---
+
+## Estilo de escritura del informe
+
+Los informes son leídos por equipos de marketing, comunicaciones y gestión de sitios web que entienden el negocio pero no necesariamente la jerga técnica de analítica, SEO o UX. Al redactar cualquier texto — callouts, párrafos de análisis, interpretaciones, recomendaciones — aplicar estas reglas:
+
+1. **Aclarar términos técnicos cuando el contexto lo requiere.** El criterio no es "solo la primera vez en el informe", sino evaluar si el lector que llega directamente a esa sección entendería el término sin contexto previo. Si un término es central para comprender el hallazgo que se está explicando, aclararlo aunque ya haya aparecido antes. Si en esa sección ya fue explicado, no repetirlo.
+
+2. **Siglas técnicas**: expandir en español cada vez que aparezcan en una sección nueva o en un contexto donde sean el dato principal del análisis:
+   - LCP → "LCP (tiempo en cargar el elemento visual principal)"
+   - CLS → "CLS (estabilidad visual durante la carga)"
+   - INP → "INP (velocidad de respuesta a interacciones)"
+   - FCP → "FCP (aparición del primer contenido visible)"
+   - TTFB → "TTFB (tiempo de respuesta inicial del servidor)"
+
+3. **Términos en inglés de comportamiento**: integrar la aclaración de forma natural cuando el término es clave para entender el análisis:
+   - Bounce rate → "tasa de rebote (bounce rate)"
+   - Dead clicks → "clics sin respuesta (dead clicks) — clics sobre elementos que parecen interactivos pero no hacen nada"
+   - Rage clicks → "clics de frustración (rage clicks) — clics repetidos y rápidos cuando un elemento no responde"
+   - Quick backs → "salidas inmediatas (quick backs) — el usuario entra a la página y vuelve atrás en pocos segundos"
+   - Scroll depth → "profundidad de scroll — qué porcentaje de la página desplazan hacia abajo los usuarios"
+   - Engagement → usar "nivel de interacción" o "interacción y engagement" en encabezados; en texto corrido integrar la aclaración cuando sea el concepto central del párrafo
+
+4. **No saturar**: la aclaración debe sentirse natural, no mecánica. Si en un párrafo breve el mismo término aparece dos veces, aclarar solo una. El objetivo es que cualquier lector pueda entender el hallazgo sin tener que buscar definiciones externamente.
+
+5. **Encabezados y títulos de tabla**: preferir el término en español directamente cuando el reemplazo es limpio. Los paréntesis son para texto corrido donde conviene conservar el término técnico como referencia.
+
+---
 
 ## Flujo de ejecución
 
@@ -113,17 +138,6 @@ Usa los MCPs en paralelo para inferir el contexto sin preguntar nada al usuario:
    Con estas tres dimensiones, construir 2-3 queries que busquen organizaciones del **mismo país** (o alcance inferido), mismo tipo y mismo nicho. Ejemplo para una fundación oncológica chilena de investigación y políticas: "fundacion cancer investigacion chile", "observatorio salud publica chile", "think tank politicas salud chile". Llamar a `mcp__dataforseo__serp_google_organic_live` con `location_code` del país correspondiente. Extraer solo dominios.
 
    Al filtrar resultados: **conservar solo organizaciones del mismo país/alcance y cuyo nicho principal coincida con el del dueño del sitio**. Descartar organizaciones de otros países aunque sean del mismo sector, y descartar organizaciones de nicho diferente aunque sean del mismo país (ej: si el dueño se enfoca en investigación y políticas, descartar clínicas y hospitales de atención).
-
-7. **GA4** — Intentar obtener datos reales de comportamiento de usuarios:
-   - Llamar a `mcp__analytics-mcp__get_account_summaries` para listar propiedades disponibles.
-   - Buscar semánticamente la propiedad que corresponde al dominio (comparar display_name con el dominio).
-   - Si se encuentra → guardar el `property_id` y ejecutar en paralelo:
-     - **Canales 28 días**: `run_report` con dimension `sessionDefaultChannelGroup`, metrics `newUsers`, `totalUsers`, `sessions`, `engagedSessions`, `bounceRate`, `averageSessionDuration`, `keyEvents`, últimos 28 días. Sin filtro de canal.
-     - **Canales 90 días**: mismo request, últimos 90 días.
-     - **Dispositivos 90 días**: `run_report` con dimension `deviceCategory`, metric `sessions`, últimos 90 días. Calcular % sobre total.
-     - **Top páginas orgánicas**: `run_report` con dimension `pagePath`, metrics `sessions`, `engagedSessions`, `bounceRate`, `averageSessionDuration`, `conversions`, filtrado por `sessionDefaultChannelGroup = "Organic Search"`, top 20 por sesiones, últimos 90 días.
-   - Si hay ambigüedad entre propiedades (dos candidatas similares), elegir la que tenga más sesiones o preguntar al usuario.
-   - Si el MCP no está disponible o no se encuentra la propiedad: registrar el error según la política de MCPs y continuar. No bloquear el flujo.
 
 ### Paso 2 — Inferencia de audiencias
 
@@ -284,42 +298,12 @@ Volumen total: [X]/mes → [veredicto]
 - Características: [rasgos observados en el copy del sitio]
 - Evitar: [qué parece no ir con la marca]
 
-**Tráfico GA4** *(omitir sección si GA4 no disponible)*
-GA4 property ID: [property_id]
-
-*Canales — últimos 28 días:*
-| Canal | Usuarios nuevos | Usuarios totales | Sesiones | Ses. con interacción | Rebote | Duración prom. | Conversiones |
-|---|---|---|---|---|---|---|---|
-| Organic Search | [new] | [total] | [ses] | [eng] | [br]% | [dur] | [conv] |
-| Paid Search | [new] | [total] | [ses] | [eng] | [br]% | [dur] | [conv] |
-| Direct | [new] | [total] | [ses] | [eng] | [br]% | [dur] | [conv] |
-
-*Canales — últimos 90 días:*
-| Canal | Usuarios nuevos | Usuarios totales | Sesiones | Ses. con interacción | Rebote | Duración prom. | Conversiones |
-|---|---|---|---|---|---|---|---|
-| Organic Search | [new] | [total] | [ses] | [eng] | [br]% | [dur] | [conv] |
-| Paid Search | [new] | [total] | [ses] | [eng] | [br]% | [dur] | [conv] |
-| Direct | [new] | [total] | [ses] | [eng] | [br]% | [dur] | [conv] |
-
-*Dispositivos — últimos 90 días:*
-| Dispositivo | Sesiones | % |
-|---|---|---|
-| Mobile | [ses] | [pct]% |
-| Desktop | [ses] | [pct]% |
-| Tablet | [ses] | [pct]% |
-
-*Top páginas orgánicas — últimos 90 días:*
-| Página | Sesiones | Sesiones activas | Tasa de rebote | Duración prom. | Conversiones |
-|---|---|---|---|---|---|
-| [url] | [ses] | [eng] | [br]% | [dur] | [conv] |
-... (top 20)
-
 ¿Qué ajustarías?
 ```
 
 ### Paso 5 — Guardado
 
-Incorpora correcciones y guarda en `$SEO_REPORTS_PATH/{dominio}/site-profile.md` usando el template en `references/site-profile-template.md`.
+Incorpora correcciones y guarda en `$SEO_REPORTS_PATH/{dominio}/context.md` usando el template en `references/context-template.md`.
 
 **Campos obligatorios a completar al guardar:**
 - `{date}` en "Generado" y "Última actualización" → usar la fecha actual (formato: YYYY-MM-DD)
@@ -333,17 +317,16 @@ Incorpora correcciones y guarda en `$SEO_REPORTS_PATH/{dominio}/site-profile.md`
 - Tono y voz de marca: guardar los tres campos (Tono, Características, Evitar)
 - **Notas estratégicas**: redactar 2-4 observaciones sobre la estrategia SEO actual basadas en el análisis (ej: "El sitio tiene tráfico de marca pero escaso contenido informacional", "Hay competidores internacionales bien posicionados en keywords transaccionales clave").
 - **Notas técnicas**: onpage_score, issues detectados, CMS detectado. Si OnPage no estuvo disponible, registrar: "OnPage no disponible al momento de la generación — ejecutar `onpage_task_get` manualmente con task_id: {id}".
-- **Tráfico GA4**: si los datos de GA4 estuvieron disponibles, guardar: property_id, tabla de canales 30 días, tabla de canales 90 días, tabla de dispositivos (con % calculado), y tabla top 20 páginas orgánicas con conversiones. Si GA4 no estuvo disponible, omitir la sección sin nota (es opcional).
 
 Al finalizar informar:
-> "Site profile guardado en `$SEO_REPORTS_PATH/{dominio}/site-profile.md`. Si tienes pautas internas, marcos SEO o guías de marca, agrégalos como archivos `.md` en `$SEO_REPORTS_PATH/{dominio}/user-context/` — los skills los leerán automáticamente con prioridad sobre este archivo."
+> "Contexto guardado en `$SEO_REPORTS_PATH/{dominio}/context.md`. Si tienes pautas internas, marcos SEO o guías de marca, agrégalos como archivos `.md` en `$SEO_REPORTS_PATH/{dominio}/context/` — los skills los leerán automáticamente con prioridad sobre este archivo."
 
 ## Estructura de archivos
 
 ```
 $SEO_REPORTS_PATH/{dominio}/
-├── site-profile.md         ← generado por este skill
-└── user-context/           ← archivos propios del usuario (prioridad)
+├── context.md              ← generado por este skill
+└── context/                ← archivos propios del usuario (prioridad)
     ├── marco-seo.md
     ├── brand-guidelines.md
     └── [cualquier .md]
@@ -352,9 +335,9 @@ $SEO_REPORTS_PATH/{dominio}/
 ## Cómo leen el contexto los demás skills
 
 ```
-1. Verificar si existe $SEO_REPORTS_PATH/{dominio}/user-context/*.md → leerlos (prioridad)
-2. Verificar si existe $SEO_REPORTS_PATH/{dominio}/site-profile.md → leerlo
-3. Si no existe → sugerir: "/webmometro-seo-site-profile {dominio}"
+1. Verificar si existe $SEO_REPORTS_PATH/{dominio}/context.md → leerlo
+2. Verificar si existe $SEO_REPORTS_PATH/{dominio}/context/*.md → leerlos (prioridad sobre context.md)
+3. Si no existe → sugerir: "/webmometro-seo context {dominio}"
 ```
 
 ## Política de errores de MCP
@@ -380,10 +363,9 @@ Referencia por MCP y sección afectada:
 | `dataforseo` (SERP) | Competidores SERP, Peers | Dominios orgánicos reales en SERPs relevantes |
 | `dataforseo` (search volume) | Viabilidad de demanda | Volumen mensual de búsqueda de keywords objetivo |
 | `gsc` | Keywords prioritarias, Páginas con potencial, Páginas en caída | Clicks, impresiones, CTR, posición real de keywords y páginas |
-| `analytics-mcp` | Tráfico GA4 | Distribución real de canales, top páginas orgánicas con engagement (bounce rate, duración) |
 
 ---
 
 ## Template de reporte
 
-Ver [references/site-profile-template.md](references/site-profile-template.md)
+Ver [references/context-template.md](references/context-template.md)

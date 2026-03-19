@@ -3,13 +3,13 @@ name: webmometro-seo-page-audit
 description: >
   Auditoría SEO profunda de una página específica. Analiza on-page SEO, contenido,
   schema, performance y visibilidad en AI Search para una URL individual. Se apoya
-  en el site-profile.md del negocio para contextualizar hallazgos. Genera un reporte
+  en el context.md del negocio para contextualizar hallazgos. Genera un reporte
   unificado con plan de acción priorizado por impacto en clicks.
   Usar cuando el usuario mencione: "auditar página", "auditar esta URL", "revisar página",
   "page audit", "auditoría de página", "analizar esta página", "revisar esta URL",
   "qué tan bien está esta página", "diagnóstico de página", "optimizar página",
   "mejorar esta página", "por qué no rankea esta página", "page seo", "on-page audit".
-  NO usar para auditorías del sitio completo — derivar a webmometro-seo-site-profile.
+  NO usar para auditorías del sitio completo — derivar a webmometro-seo-context.
 metadata:
   version: 1.0.0
   argument-hint: "[URL de la página]"
@@ -23,7 +23,7 @@ Auditoría SEO profunda de una **página específica**. No del sitio completo.
 
 **Este skill es para UNA página.** Si el usuario pide:
 - Auditoría del sitio completo, diagnóstico general del dominio, health check del sitio → derivar:
-  > "Para auditar el sitio completo, usa `/webmometro-seo-site-profile [dominio]` — ese skill genera un diagnóstico integral con datos GSC, autoridad, canibalización y plan de acción para todo el dominio."
+  > "Para auditar el sitio completo, usa `/webmometro-seo-context [dominio]` — ese skill genera un diagnóstico integral con datos GSC, autoridad, canibalización y plan de acción para todo el dominio."
 - Auditoría de múltiples páginas a la vez → preguntar cuál priorizar primero.
 
 ---
@@ -39,6 +39,33 @@ Al iniciar, resolver la ruta base de reportes:
 Si `REPORTS_DIR` no existe, crearlo con `mkdir -p` antes de continuar.
 
 Todas las referencias a `$SEO_REPORTS_PATH` en este skill se resuelven como `REPORTS_DIR`.
+
+---
+
+## Estilo de escritura del informe
+
+Los informes son leídos por equipos de marketing, comunicaciones y gestión de sitios web que entienden el negocio pero no necesariamente la jerga técnica de analítica, SEO o UX. Al redactar cualquier texto — callouts, párrafos de análisis, interpretaciones, recomendaciones — aplicar estas reglas:
+
+1. **Aclarar términos técnicos cuando el contexto lo requiere.** El criterio no es "solo la primera vez en el informe", sino evaluar si el lector que llega directamente a esa sección entendería el término sin contexto previo. Si un término es central para comprender el hallazgo que se está explicando, aclararlo aunque ya haya aparecido antes. Si en esa sección ya fue explicado, no repetirlo.
+
+2. **Siglas técnicas**: expandir en español cada vez que aparezcan en una sección nueva o en un contexto donde sean el dato principal del análisis:
+   - LCP → "LCP (tiempo en cargar el elemento visual principal)"
+   - CLS → "CLS (estabilidad visual durante la carga)"
+   - INP → "INP (velocidad de respuesta a interacciones)"
+   - FCP → "FCP (aparición del primer contenido visible)"
+   - TTFB → "TTFB (tiempo de respuesta inicial del servidor)"
+
+3. **Términos en inglés de comportamiento**: integrar la aclaración de forma natural cuando el término es clave para entender el análisis:
+   - Bounce rate → "tasa de rebote (bounce rate)"
+   - Dead clicks → "clics sin respuesta (dead clicks) — clics sobre elementos que parecen interactivos pero no hacen nada"
+   - Rage clicks → "clics de frustración (rage clicks) — clics repetidos y rápidos cuando un elemento no responde"
+   - Quick backs → "salidas inmediatas (quick backs) — el usuario entra a la página y vuelve atrás en pocos segundos"
+   - Scroll depth → "profundidad de scroll — qué porcentaje de la página desplazan hacia abajo los usuarios"
+   - Engagement → usar "nivel de interacción" o "interacción y engagement" en encabezados; en texto corrido integrar la aclaración cuando sea el concepto central del párrafo
+
+4. **No saturar**: la aclaración debe sentirse natural, no mecánica. Si en un párrafo breve el mismo término aparece dos veces, aclarar solo una. El objetivo es que cualquier lector pueda entender el hallazgo sin tener que buscar definiciones externamente.
+
+5. **Encabezados y títulos de tabla**: preferir el término en español directamente cuando el reemplazo es limpio. Los paréntesis son para texto corrido donde conviene conservar el término técnico como referencia.
 
 ---
 
@@ -81,12 +108,12 @@ Ejecutar en este orden.
 
 ### Paso 0 — Contexto del negocio
 
-Verificar si existe `$SEO_REPORTS_PATH/{dominio}/site-profile.md`:
+Verificar si existe `$SEO_REPORTS_PATH/{dominio}/context.md`:
 
 - **Si existe**: leerlo. Extraer: tipo de negocio, audiencia objetivo SEO, pilares de contenido, tono de marca, keywords prioritarias. Este contexto informa qué es un "buen" resultado para esta página.
-- **Si existe `$SEO_REPORTS_PATH/{dominio}/user-context/`**: leer también los archivos `.md` ahí (prioridad sobre `site-profile.md`).
+- **Si existe `$SEO_REPORTS_PATH/{dominio}/context/`**: leer también los archivos `.md` ahí (prioridad sobre `context.md`).
 - **Si no existe**: continuar sin él, pero advertir al usuario:
-  > "No encontré el contexto del negocio para `{dominio}`. El análisis será genérico. Para obtener hallazgos contextualizados al negocio, genera el perfil con `/webmometro-seo-site-profile {dominio}`."
+  > "No encontré el contexto del negocio para `{dominio}`. El análisis será genérico. Para obtener hallazgos contextualizados al negocio, genera el perfil con `/webmometro-seo-context {dominio}`."
 
 ### Paso 0.5 — Identificar MCP de Microsoft Clarity
 
