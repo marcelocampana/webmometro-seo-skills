@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "skills": {
+    "obsidian-canvas-creator": {
+      "source": "axtonliu/axton-obsidian-visual-skills",
+      "sourceType": "github",
+      "computedHash": "8da7f394270c3a4fe3829d54757074b0bb016495325945ea2a2f29f451c266b9"
+    },
+    "obsidian-markdown": {
+      "source": "kepano/obsidian-skills",
+      "sourceType": "github",
+      "computedHash": "cacc9058a35ad3fd4985b4c31121bff8202f1337c39808c1326ded6a19a7915f"
+    }
+  }
+}
