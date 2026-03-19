@@ -181,7 +181,34 @@ El skill identifica el MCP correcto por similitud semántica al nombre del negoc
 
 ---
 
-### 3. Configurar la ruta de reportes (`SEO_REPORTS_PATH`)
+### 3. Autenticar Google Analytics 4 (analytics-mcp)
+
+El MCP `analytics-mcp` usa Application Default Credentials de Google Cloud. La autenticación estándar **no incluye los scopes necesarios** para la Analytics Data API — se debe hacer con el comando extendido:
+
+```bash
+gcloud auth application-default login \
+  --scopes="https://www.googleapis.com/auth/analytics.readonly,https://www.googleapis.com/auth/cloud-platform"
+```
+
+Luego, configurar el proyecto de cuota (necesario para que la Analytics Data API esté habilitada):
+
+```bash
+gcloud auth application-default set-quota-project TU_PROJECT_ID
+```
+
+Para obtener tu `PROJECT_ID`:
+
+```bash
+gcloud projects list
+```
+
+> **Cuándo repetir esto**: el token expira periódicamente. Si un skill GA4 muestra el error `Reauthentication is needed` o `ACCESS_TOKEN_SCOPE_INSUFFICIENT`, vuelve a ejecutar el comando `gcloud auth application-default login` con los scopes indicados.
+
+**Limitación conocida de GA4**: las dimensiones de sesión (`deviceCategory`, `newVsReturning`, `sessionDefaultChannelGroup`) son de ámbito de sitio completo — no se pueden filtrar por URL de página. Los skills UX documentan esto en cada informe.
+
+---
+
+### 4. Configurar la ruta de reportes (`SEO_REPORTS_PATH`)
 
 Los reportes y contextos se almacenan en una carpeta configurable. La ruta se resuelve así:
 

@@ -67,7 +67,9 @@
       "Bash(mkdir -p /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-page/references)",
       "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-ux-site/SKILL.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-site/SKILL.md)",
       "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-ux-site/references/ux-site-template.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-site/references/ux-site-template.md)",
-      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-ux-page/SKILL.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-page/SKILL.md)"
+      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-ux-page/SKILL.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-page/SKILL.md)",
+      "Bash(ls /Users/marcelocampana/Documents/Work/Webmometro/seo-projects/reports/observatoriodelcancer.cl/ux/ux-page-home-*.md)",
+      "Bash(gcloud auth:*)"
     ],
     "additionalDirectories": [
       "/tmp",
@@ -76,7 +78,8 @@
       "/Users/marcelocampana/Projects/webmometro-seo-skills/reports/clinicadrazaror.cl",
       "/Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-site-profile",
       "/Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-site-profile/references",
-      "/Users/marcelocampana/Projects/webmometro-seo-skills"
+      "/Users/marcelocampana/Projects/webmometro-seo-skills",
+      "/Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-page"
     ]
   }
 }
