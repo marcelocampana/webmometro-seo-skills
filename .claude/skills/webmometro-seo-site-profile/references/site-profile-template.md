@@ -33,18 +33,18 @@ estado: validado
 **GA4 property ID**: {property_id}
 
 ### Canales — últimos 28 días
-| Canal | Usuarios nuevos | Usuarios totales | Sesiones | Ses. con interacción | Rebote | Duración prom. | Conversiones |
-|---|---|---|---|---|---|---|---|
-| Organic Search | {new} | {total} | {ses} | {eng} | {br}% | {dur} | {conv} |
-| Paid Search | {new} | {total} | {ses} | {eng} | {br}% | {dur} | {conv} |
-| Direct | {new} | {total} | {ses} | {eng} | {br}% | {dur} | {conv} |
+| Canal | Usuarios nuevos | Usuarios totales | Sesiones | Ses. con interacción | Rebote | Duración prom. |
+|---|---|---|---|---|---|---|
+| Organic Search | {new} | {total} | {ses} | {eng} | {br}% | {dur} |
+| Paid Search | {new} | {total} | {ses} | {eng} | {br}% | {dur} |
+| Direct | {new} | {total} | {ses} | {eng} | {br}% | {dur} |
 
 ### Canales — últimos 90 días
-| Canal | Usuarios nuevos | Usuarios totales | Sesiones | Ses. con interacción | Rebote | Duración prom. | Conversiones |
-|---|---|---|---|---|---|---|---|
-| Organic Search | {new} | {total} | {ses} | {eng} | {br}% | {dur} | {conv} |
-| Paid Search | {new} | {total} | {ses} | {eng} | {br}% | {dur} | {conv} |
-| Direct | {new} | {total} | {ses} | {eng} | {br}% | {dur} | {conv} |
+| Canal | Usuarios nuevos | Usuarios totales | Sesiones | Ses. con interacción | Rebote | Duración prom. |
+|---|---|---|---|---|---|---|
+| Organic Search | {new} | {total} | {ses} | {eng} | {br}% | {dur} |
+| Paid Search | {new} | {total} | {ses} | {eng} | {br}% | {dur} |
+| Direct | {new} | {total} | {ses} | {eng} | {br}% | {dur} |
 
 ### Dispositivos — últimos 90 días
 | Dispositivo | Sesiones | % |
@@ -54,12 +54,9 @@ estado: validado
 | Tablet | {ses} | {pct}% |
 
 ### Top páginas orgánicas — últimos 90 días
-| Página | Sesiones | Sesiones con interacción | Tasa de rebote | Duración prom. | Tasa de conversión |
-|---|---|---|---|---|---|
-| {url} | {ses} | {eng} | {br}% | {dur} | {conv}% |
-
-> [!warning] Anomalías de conversiones
-> Si alguna página reporta conversiones fuera de rango, probablemente hay un evento de analytics mal configurado. Revisar configuración de eventos en GA4.
+| Página | Sesiones | Sesiones con interacción | Tasa de rebote | Duración prom. |
+|---|---|---|---|---|
+| {url} | {ses} | {eng} | {br}% | {dur} |
 
 ---
 
