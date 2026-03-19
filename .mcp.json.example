@@ -1,0 +1,45 @@
+{
+  "mcpServers": {
+    "dataforseo": {
+      "command": "bash",
+      "args": [
+        "-lc",
+        "cd /ruta/a/dataforseo-mcp-server && DATAFORSEO_LOGIN=\"tu-email@dominio.com\" DATAFORSEO_PASSWORD=\"tu-password\" node dist/index.js"
+      ]
+    },
+    "gsc": {
+      "command": "env",
+      "args": [
+        "GOOGLE_APPLICATION_CREDENTIALS=/ruta/a/gsc-credentials.json",
+        "npx",
+        "-y",
+        "mcp-server-gsc"
+      ]
+    },
+    "pagespeed": {
+      "command": "node",
+      "args": ["/ruta/a/mcp-server-pagespeed/build/index.js"],
+      "env": {
+        "PAGESPEED_API_KEY": "tu-api-key"
+      }
+    },
+    "analytics-mcp": {
+      "command": "/ruta/a/analytics-mcp",
+      "args": [],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "/ruta/a/application_default_credentials.json"
+      }
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["chrome-devtools-mcp@latest"]
+    },
+    "clarity-nombre-proyecto": {
+      "command": "npx",
+      "args": ["-y", "@microsoft/clarity-mcp-server"],
+      "env": {
+        "CLARITY_API_TOKEN": "tu-clarity-api-token"
+      }
+    }
+  }
+}

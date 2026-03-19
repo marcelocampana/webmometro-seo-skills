@@ -28,12 +28,26 @@ Auditoría SEO profunda de una **página específica**. No del sitio completo.
 
 ---
 
+## Configuración de ruta de reportes
+
+Al iniciar, resolver la ruta base de reportes:
+
+- Si `$SEO_REPORTS_PATH` está definida → usar ese valor como `REPORTS_DIR`
+- Si no está definida → usar `{cwd}/reports` como `REPORTS_DIR` y advertir al usuario:
+  > "No encontré `SEO_REPORTS_PATH`. Guardando reportes en `{cwd}/reports`. Para usar otra ubicación, define `SEO_REPORTS_PATH` en `.claude/settings.json`."
+
+Si `REPORTS_DIR` no existe, crearlo con `mkdir -p` antes de continuar.
+
+Todas las referencias a `$SEO_REPORTS_PATH` en este skill se resuelven como `REPORTS_DIR`.
+
+---
+
 ## Control de frescura del reporte
 
 Antes de iniciar cualquier análisis, verificar si ya existe un reporte para esta página:
 
 ```
-reports/{dominio}/audits/{fecha}-page-audit-{slug}.md
+$SEO_REPORTS_PATH/{dominio}/audits/{fecha}-page-audit-{slug}.md
 ```
 
 Si existe un reporte cuya fecha en el nombre de archivo tiene **menos de 15 días** desde hoy:
@@ -67,12 +81,25 @@ Ejecutar en este orden.
 
 ### Paso 0 — Contexto del negocio
 
-Verificar si existe `reports/{dominio}/context.md`:
+Verificar si existe `$SEO_REPORTS_PATH/{dominio}/context.md`:
 
 - **Si existe**: leerlo. Extraer: tipo de negocio, audiencia objetivo SEO, pilares de contenido, tono de marca, keywords prioritarias. Este contexto informa qué es un "buen" resultado para esta página.
-- **Si existe `reports/{dominio}/context/`**: leer también los archivos `.md` ahí (prioridad sobre `context.md`).
+- **Si existe `$SEO_REPORTS_PATH/{dominio}/context/`**: leer también los archivos `.md` ahí (prioridad sobre `context.md`).
 - **Si no existe**: continuar sin él, pero advertir al usuario:
   > "No encontré el contexto del negocio para `{dominio}`. El análisis será genérico. Para obtener hallazgos contextualizados al negocio, genera el perfil con `/webmometro-seo-context {dominio}`."
+
+### Paso 0.5 — Identificar MCP de Microsoft Clarity
+
+Antes de ejecutar el flujo principal, verificar si existe un MCP de Clarity para este dominio:
+
+1. Listar todos los MCPs disponibles que empiecen con `clarity-`
+2. Elegir el que semánticamente más se parezca al dominio o nombre del negocio (comparación visual/semántica, no string matching exacto — ej: `observatoriodelcancer.cl` → `clarity-observatorio-del-cancer`)
+3. Si hay ambigüedad entre dos candidatos, preguntar al usuario cuál corresponde
+4. Si ninguno corresponde: `clarity_mcp = null` — omitir todos los pasos de Clarity sin error
+
+Guardar el resultado como `clarity_mcp` para usarlo en el Paso 2.5.
+
+---
 
 ### Paso 1 — Datos GSC de la página
 
@@ -115,6 +142,33 @@ Hacer fetch de la URL. Extraer y registrar con exactitud (texto literal, no inte
 - Cantidad total de imágenes
 - Cuántas tienen alt text ausente o vacío
 - Formatos detectados (jpg, png, webp, etc.)
+
+### Paso 2.5 — Comportamiento de usuario (Clarity)
+
+**Solo si `clarity_mcp` fue identificado en el Paso 0.5.**
+
+Ejecutar dos queries al MCP identificado:
+
+```
+{clarity_mcp}__query-analytics-dashboard →
+  "Quick backs, scroll depth, rage clicks, dead clicks para {URL}, últimos 30 días"
+
+{clarity_mcp}__list-session-recordings →
+  filtrar por URL auditada, ordenar por SessionDuration_DESC, count: 5
+```
+
+Registrar:
+- **Quick backs (%)**: porcentaje de sesiones que volvieron al SERP rápidamente. >40% = señal de intención no satisfecha
+- **Scroll depth promedio**: si <50% del contenido es leído → problema de estructura o relevancia
+- **Rage clicks**: si hay rage clicks, identificar en qué zona de la página ocurren
+- **Dead clicks**: elementos no interactivos que los usuarios intentan clickear (confusión de UX)
+- **Duración promedio de sesión** (desde list-session-recordings): proxy de engagement con el contenido
+
+Estos datos se usan en las secciones "Contenido y E-E-A-T" y "Plan de acción" del reporte.
+
+Si Clarity no retorna datos para la URL específica (sin suficiente tráfico o sin datos del período), anotar "Sin datos Clarity para esta URL" y continuar.
+
+---
 
 ### Paso 3 — OnPage técnico de la URL
 
@@ -214,7 +268,7 @@ Al generar el reporte:
 
 Generar el reporte usando el template en `references/page-audit-template.md`.
 
-Guardar en: `reports/{dominio}/audits/{fecha}-page-audit-{slug}.md`
+Guardar en: `$SEO_REPORTS_PATH/{dominio}/audits/{fecha}-page-audit-{slug}.md`
 
 Donde `{slug}` es el último segmento del path de la URL (ej: `/tratamientos/esteticos/hifu-12d` → `hifu-12d`, `/` → `home`).
 
@@ -227,7 +281,7 @@ Para regeneraciones parciales, ejecutar solo los pasos necesarios:
 | Sección | Pasos a ejecutar |
 |---|---|
 | 1. On-Page SEO | Paso 2 (WebFetch) + Paso 3 (OnPage) |
-| 2. Contenido y E-E-A-T | Paso 2 (WebFetch) |
+| 2. Contenido y E-E-A-T | Paso 2 (WebFetch) + Paso 2.5 (Clarity) |
 | 3. Schema | Paso 2 (WebFetch) |
 | 4. Performance | Paso 4 (PageSpeed) |
 | 5. Imágenes | Paso 2 (WebFetch) |
@@ -263,6 +317,8 @@ Para regeneraciones parciales, ejecutar solo los pasos necesarios:
 |---|---|---|
 | `mcp__gsc__search_analytics` | 1 | Siempre |
 | `mcp__gsc__enhanced_search_analytics` | 1 | Siempre |
+| `{clarity_mcp}__query-analytics-dashboard` | 2.5 | Si clarity_mcp fue identificado |
+| `{clarity_mcp}__list-session-recordings` | 2.5 | Si clarity_mcp fue identificado |
 | `mcp__dataforseo__onpage_task_post` | 3 | Siempre |
 | `mcp__dataforseo__onpage_tasks_ready` | 3 | Después de onpage_task_post |
 | `mcp__dataforseo__onpage_pages` | 3 | Después de onpage_tasks_ready |
@@ -271,6 +327,35 @@ Para regeneraciones parciales, ejecutar solo los pasos necesarios:
 | `mcp__dataforseo__backlinks_backlinks` | 6 | Siempre — target: URL específica |
 | `mcp__dataforseo__backlinks_anchors` | 6 | Siempre — target: URL específica |
 | `mcp__dataforseo__labs_google_keywords_for_site` | 8 | Si hay keywords GSC |
+
+---
+
+## Política de errores de MCP
+
+Si un MCP falla, no está disponible, o no retorna datos para la URL analizada, **nunca omitir silenciosamente**. En todos los casos:
+
+1. Continuar con los demás pasos sin interrumpir el flujo
+2. En la sección correspondiente del reporte, registrar:
+
+```
+> ⚠️ **Datos no disponibles** — {nombre del MCP} no respondió o no está instalado.
+> Sin estos datos, {descripción del valor que aportaría}.
+> Para obtener esta información, instala o verifica la configuración de `{nombre-mcp}`.
+```
+
+Referencia por MCP y sección afectada:
+
+| MCP | Sección afectada | Valor que aportaría si estuviera activo |
+|---|---|---|
+| `gsc` | Keywords GSC, Canibalización | Clicks, impresiones, CTR real, keywords que traen tráfico a esta URL |
+| `dataforseo` (OnPage) | Technical SEO | Score técnico, issues de crawl, tiempo de carga, profundidad |
+| `dataforseo` (SERP) | Visibilidad en AI Search | Posición real, SERP features, comparación con competidores |
+| `dataforseo` (backlinks) | Backlinks | Dominios referentes, anchor text, spam score |
+| `dataforseo` (labs) | Canibalización | Otras URLs del dominio rankeando para las mismas keywords |
+| `pagespeed` | Performance y CWV | LCP, CLS, INP, FCP, TTFB para mobile y desktop |
+| `clarity-{proyecto}` | Comportamiento de usuario (Contenido/E-E-A-T) | Quick backs, scroll depth, rage clicks, duración de sesión orgánica |
+
+Si una categoría del score no tiene datos por fallo de MCP, excluirla del cálculo y anotarlo en la tabla de scoring con `— (sin datos)`.
 
 ---
 
