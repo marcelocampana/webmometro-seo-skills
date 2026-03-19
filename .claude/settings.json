@@ -69,7 +69,8 @@
       "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-ux-site/references/ux-site-template.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-site/references/ux-site-template.md)",
       "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-ux-page/SKILL.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-page/SKILL.md)",
       "Bash(ls /Users/marcelocampana/Documents/Work/Webmometro/seo-projects/reports/observatoriodelcancer.cl/ux/ux-page-home-*.md)",
-      "Bash(gcloud auth:*)"
+      "Bash(gcloud auth:*)",
+      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-ux-page/references/ux-page-template.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-page/references/ux-page-template.md)"
     ],
     "additionalDirectories": [
       "/tmp",

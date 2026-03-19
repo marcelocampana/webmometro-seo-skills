@@ -21,6 +21,33 @@ metadata:
 
 Genera un informe de experiencia de usuario para el sitio completo, orientado al equipo de diseño. Combina datos de Google Analytics 4 (comportamiento agregado) y Microsoft Clarity (señales de frustración y engagement).
 
+## Estilo de escritura del informe
+
+Los informes son leídos por equipos de marketing, comunicaciones y gestión de sitios web que entienden el negocio pero no necesariamente la jerga técnica de analítica o UX. Al redactar cualquier texto — callouts, párrafos de análisis, interpretaciones, recomendaciones — aplicar estas reglas:
+
+1. **Aclarar términos técnicos cuando el contexto lo requiere.** El criterio no es "solo la primera vez en el informe", sino evaluar si el lector que llega directamente a esa sección entendería el término sin contexto previo. Si un término es central para comprender el hallazgo que se está explicando, aclararlo aunque ya haya aparecido antes. Si en esa sección ya fue explicado, no repetirlo.
+
+2. **Siglas técnicas**: expandir en español cada vez que aparezcan en una sección nueva o en un contexto donde sean el dato principal del análisis:
+   - LCP → "LCP (tiempo en cargar el elemento visual principal)"
+   - CLS → "CLS (estabilidad visual durante la carga)"
+   - INP → "INP (velocidad de respuesta a interacciones)"
+   - FCP → "FCP (aparición del primer contenido visible)"
+   - TTFB → "TTFB (tiempo de respuesta inicial del servidor)"
+
+3. **Términos en inglés de comportamiento**: integrar la aclaración de forma natural cuando el término es clave para entender el análisis:
+   - Bounce rate → "tasa de rebote (bounce rate)"
+   - Dead clicks → "clics sin respuesta (dead clicks) — clics sobre elementos que parecen interactivos pero no hacen nada"
+   - Rage clicks → "clics de frustración (rage clicks) — clics repetidos y rápidos cuando un elemento no responde"
+   - Quick backs → "salidas inmediatas (quick backs) — el usuario entra a la página y vuelve atrás en pocos segundos"
+   - Scroll depth → "profundidad de scroll — qué porcentaje de la página desplazan hacia abajo los usuarios"
+   - Engagement → usar "nivel de interacción" o "interacción y engagement" en encabezados; en texto corrido integrar la aclaración cuando sea el concepto central del párrafo
+
+4. **No saturar**: la aclaración debe sentirse natural, no mecánica. Si en un párrafo breve el mismo término aparece dos veces, aclarar solo una. El objetivo es que cualquier lector pueda entender el hallazgo sin tener que buscar definiciones externamente.
+
+5. **Encabezados y títulos de tabla**: preferir el término en español directamente cuando el reemplazo es limpio. Los paréntesis son para texto corrido donde conviene conservar el término técnico como referencia.
+
+---
+
 ## Regla fundamental: scope
 
 **Este skill es para el SITIO COMPLETO.** Si el usuario pide análisis de una página específica → derivar:
