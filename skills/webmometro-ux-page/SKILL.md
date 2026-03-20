@@ -147,14 +147,16 @@ Abrí el navegador para autorizar el acceso a Google Analytics.
 Por favor autoriza con tu cuenta de Google y responde "listo" cuando termines.
 ```
 
-Esperar respuesta del usuario. Si responde "listo" o similar → reintentar `mcp__analytics-mcp__get_account_summaries` y continuar con los pasos GA4. Si no responde o cancela → registrar en el informe:
+Esperar respuesta del usuario:
+- Si responde "listo" → reintentar `mcp__analytics-mcp__get_account_summaries` y continuar
+- Si no responde, cancela, o el reintento falla → **detener el análisis** con este mensaje:
 
 ```
-> ⚠️ **Datos de GA4 no disponibles** — Token de autenticación expirado.
-> Para obtener estos datos, ejecuta el comando de re-autenticación y regenera la sección 2.
+⛔ Análisis detenido — GA4 es necesario para este informe.
+Cuando tengas la autenticación resuelta, reinicia el análisis.
 ```
 
-Si no hay ninguna propiedad disponible por otro motivo: `ga4_property = null` — omitir pasos GA4, registrar bloque ⚠️.
+Si no hay ninguna propiedad disponible por otro motivo → **detener igualmente** con el mismo mensaje.
 
 ---
 
