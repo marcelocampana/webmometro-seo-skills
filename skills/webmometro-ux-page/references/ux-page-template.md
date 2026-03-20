@@ -28,6 +28,40 @@ tipo: ux-page
 
 ---
 
+## Observación visual del sitio
+
+*Fuente: Chrome DevTools — captura directa del sitio al momento de la generación del informe*
+
+### Menú de navegación
+
+**Desktop**
+
+| Ítem | Destino |
+|---|---|
+| {texto} | {href} |
+
+**Mobile**
+
+| Ítem | Destino |
+|---|---|
+| {texto} | {href} |
+
+> [!note] Consistencia desktop/mobile
+> {¿Los ítems y textos son idénticos en ambos dispositivos? Si hay diferencias, listarlas explícitamente. Si son iguales, confirmarlo en una línea.}
+
+### CTAs principales
+
+| Texto del botón o enlace | Zona de la página |
+|---|---|
+| {texto} | {hero / sección / footer} |
+
+### Elementos interactivos vs decorativos
+
+> [!note]
+> {Lista de elementos que tienen interactividad declarada (cursor activo, enlace o acción asignada) versus elementos que visualmente parecen clicables pero no tienen ninguna acción. Permite validar o refutar los clics sin respuesta registrados por Clarity.}
+
+---
+
 ## Resumen ejecutivo
 
 > [!abstract] UX Page Score: {score}/100 — {estado}
