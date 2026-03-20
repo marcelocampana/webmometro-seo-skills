@@ -135,14 +135,15 @@ Si el tool falla con error de reautenticación (`Reauthentication is needed` o `
 ```
 ⚠️  GA4 requiere re-autenticación
 
-Ejecuta este comando en una terminal y sigue las instrucciones en pantalla:
+1. Ejecuta este comando en una terminal:
 
 gcloud auth application-default login \
   --scopes https://www.googleapis.com/auth/analytics.readonly,https://www.googleapis.com/auth/cloud-platform \
   --client-id-file="/Users/marcelocampana/Projects/mcps/credentials/client_secret_728451328493-7iui8q0bbpicgb3fdukfe84goa5emsvd.apps.googleusercontent.com.json"
 
-El comando abrirá el navegador para que autorices el acceso con tu cuenta de Google.
-Una vez completado, las credenciales se guardan automáticamente en:
+2. Se abrirá el navegador — autoriza el acceso con tu cuenta de Google.
+
+Las credenciales se guardan automáticamente en:
 /Users/marcelocampana/.config/gcloud/application_default_credentials.json
 
 Cuando termines, responde "listo" para regenerar la sección de GA4.
