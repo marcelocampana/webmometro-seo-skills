@@ -2,7 +2,7 @@
 title: Análisis UX Profundo — {dominio}
 dominio: {dominio}
 pagina_analizada: {URL de la página del informe ux-page}
-generado: {fecha}
+generado: YYYY-MM-DD
 fuentes:
   - {ux-site-fecha.md}
   - {ux-page-slug-fecha.md}
@@ -71,7 +71,8 @@ Impacto: {comportamiento resultante}
 
 ## Wireframe — {nombre de la página o flujo}
 
-_{Qué problema de diseño resuelve este wireframe, en una línea. Referencia directa a la causa raíz del diagnóstico.}_
+> [!abstract]
+> {Qué problema de diseño resuelve este wireframe, en una línea. Referencia directa a la causa raíz del diagnóstico.}
 
 **[{Nombre del bloque 1}]**
 Contenido: {qué va aquí — concreto, no genérico}
@@ -150,13 +151,12 @@ Principio: {principio aplicado}
 
 ---
 
-## Conclusión
+> [!abstract] Conclusión
+> {Lectura de conjunto que integra diagnóstico, wireframe y backlog en una sola idea — no repite hallazgos individuales sino el patrón que los conecta. Puede incluir: tensiones entre fuentes (cuando los datos cuantitativos y la evidencia visual apuntan en direcciones distintas), hipótesis sin confirmar que merecen atención, o lo que no se está midiendo pero los datos sugieren que importa.
+>
+> Tono neutro, sin primera persona.}
 
-{Lectura de conjunto que integra diagnóstico, wireframe y backlog en una sola idea — no repite hallazgos individuales sino el patrón que los conecta. Puede incluir: tensiones entre fuentes (cuando los datos cuantitativos y la evidencia visual apuntan en direcciones distintas), hipótesis sin confirmar que merecen atención, o lo que no se está midiendo pero los datos sugieren que importa.
-
-Tono neutro, sin primera persona. Voz de análisis experto, no de participante.
-
-Cierre obligatorio en párrafo separado: una frase que sintetiza el cambio más importante y el impacto esperado — formulada de modo que el equipo pueda citarla en una reunión sin necesidad de releer el informe.}
+{Párrafo de cierre fuera del callout: una frase que sintetiza el cambio más importante y el impacto esperado — formulada de modo que el equipo pueda citarla en una reunión sin necesidad de releer el informe.}
 
 ---
 
