@@ -106,12 +106,13 @@ Si existe un reporte con **menos de 15 días** desde hoy:
 > **C** — Cancelar
 >
 > O indica el número de la sección que quieres actualizar:
-> 1. Apertura y diagnóstico de diseño
-> 2. Wireframe textual
-> 3. Backlog UX
-> 4. Propuesta de navegación
-> 5. Perfiles de usuario
-> 6. Conclusión"
+> 1. Apertura narrativa y tabla de estado
+> 2. Diagnóstico de diseño
+> 3. Wireframe textual
+> 4. Backlog UX
+> 5. Propuesta de navegación (si aplica)
+> 6. Perfiles de usuario (si aplica)
+> 7. Conclusión"
 
 Si el usuario responde con números, ejecutar solo los pasos necesarios y actualizar esas secciones. Si el reporte tiene **15 días o más**, o no existe → ejecutar el flujo completo.
 
@@ -402,7 +403,9 @@ Si algún informe requerido no puede leerse o está vacío → registrar el prob
 
 Ver [references/ux-deep-template.md](references/ux-deep-template.md)
 
-## Reglas de diseño UX disponibles en references/rules/
+## Reglas de diseño UX (references/rules/)
+
+Estos archivos son parte de este skill. Leerlos como criterio de razonamiento interno — no citar su contenido textualmente en el informe.
 
 | Dimensión | Archivo | Cuándo leer |
 |---|---|---|
