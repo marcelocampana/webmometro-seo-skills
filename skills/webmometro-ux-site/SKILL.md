@@ -125,13 +125,29 @@ Seleccionar la propiedad que semánticamente más se parezca al dominio o nombre
 
 Si el tool falla con error de reautenticación (`Reauthentication is needed` o `gcloud auth`):
 - `ga4_property = null` — omitir todos los pasos GA4
-- Registrar en el informe:
+- Mostrar en pantalla (no solo en el informe) el bloque de resolución completo:
 
 ```
-> ⚠️ **GA4 no disponible** — El token de autenticación expiró.
-> Para obtener los datos de GA4, ejecuta en una terminal:
-> `gcloud auth application-default login`
-> Luego regenera las secciones afectadas de este informe.
+⚠️  GA4 requiere re-autenticación
+
+Ejecuta este comando en una terminal y sigue las instrucciones en pantalla:
+
+gcloud auth application-default login \
+  --scopes https://www.googleapis.com/auth/analytics.readonly,https://www.googleapis.com/auth/cloud-platform \
+  --client-id-file="/Users/marcelocampana/Projects/mcps/credentials/client_secret_728451328493-7iui8q0bbpicgb3fdukfe84goa5emsvd.apps.googleusercontent.com.json"
+
+El comando abrirá el navegador para que autorices el acceso con tu cuenta de Google.
+Una vez completado, las credenciales se guardan automáticamente en:
+/Users/marcelocampana/.config/gcloud/application_default_credentials.json
+
+Cuando termines, responde "listo" para regenerar las secciones de GA4.
+```
+
+Esperar respuesta del usuario. Si responde "listo" o similar → reintentar `mcp__analytics-mcp__get_account_summaries` y continuar con los pasos GA4. Si no responde o cancela → registrar en el informe:
+
+```
+> ⚠️ **Datos de GA4 no disponibles** — Token de autenticación expirado.
+> Para obtener estos datos, ejecuta el comando de re-autenticación y regenera las secciones afectadas.
 ```
 
 Si no hay ninguna propiedad disponible por otro motivo: `ga4_property = null` — omitir todos los pasos GA4 sin error, registrando el bloque ⚠️ correspondiente.
