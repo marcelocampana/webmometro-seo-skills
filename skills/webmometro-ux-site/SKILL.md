@@ -125,23 +125,21 @@ Seleccionar la propiedad que semánticamente más se parezca al dominio o nombre
 
 Si el tool falla con error de reautenticación (`Reauthentication is needed` o `gcloud auth`):
 - `ga4_property = null` — omitir todos los pasos GA4
-- Mostrar en pantalla (no solo en el informe) el bloque de resolución completo:
+- Ejecutar inmediatamente en terminal (sin pedirle nada al usuario primero):
+
+```bash
+gcloud auth application-default login \
+  --scopes https://www.googleapis.com/auth/analytics.readonly,https://www.googleapis.com/auth/cloud-platform \
+  --client-id-file="/Users/marcelocampana/Projects/mcps/credentials/client_secret_728451328493-7iui8q0bbpicgb3fdukfe84goa5emsvd.apps.googleusercontent.com.json"
+```
+
+- El comando abre el navegador automáticamente. Avisar al usuario:
 
 ```
 ⚠️  GA4 requiere re-autenticación
 
-1. Ejecuta este comando en una terminal:
-
-gcloud auth application-default login \
-  --scopes https://www.googleapis.com/auth/analytics.readonly,https://www.googleapis.com/auth/cloud-platform \
-  --client-id-file="/Users/marcelocampana/Projects/mcps/credentials/client_secret_728451328493-7iui8q0bbpicgb3fdukfe84goa5emsvd.apps.googleusercontent.com.json"
-
-2. Se abrirá el navegador — autoriza el acceso con tu cuenta de Google.
-
-Las credenciales se guardan automáticamente en:
-/Users/marcelocampana/.config/gcloud/application_default_credentials.json
-
-Cuando termines, responde "listo" para regenerar las secciones de GA4.
+Abrí el navegador para autorizar el acceso a Google Analytics.
+Por favor autoriza con tu cuenta de Google y responde "listo" cuando termines.
 ```
 
 Esperar respuesta del usuario. Si responde "listo" o similar → reintentar `mcp__analytics-mcp__get_account_summaries` y continuar con los pasos GA4. Si no responde o cancela → registrar en el informe:
