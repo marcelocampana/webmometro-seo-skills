@@ -89,6 +89,7 @@ Si existe un reporte con **menos de 15 días** desde hoy:
 > **C** — Cancelar
 >
 > O indica el número de la sección que quieres actualizar:
+> 0. Inspección visual (menú, CTAs, elementos interactivos)
 > 1. Comportamiento Clarity (rage/dead clicks, quick backs, scroll)
 > 2. Engagement GA4 (sesiones, bounce, duración)
 > 3. Performance CWV
@@ -129,16 +130,98 @@ Seleccionar la propiedad que semánticamente más se parezca al dominio. Guardar
 
 Si el tool falla con error de reautenticación (`Reauthentication is needed` o `gcloud auth`):
 - `ga4_property = null` — omitir todos los pasos GA4
-- Registrar en el informe:
+- Ejecutar inmediatamente en terminal (sin pedirle nada al usuario primero):
+
+```bash
+gcloud auth application-default login \
+  --scopes https://www.googleapis.com/auth/analytics.readonly,https://www.googleapis.com/auth/cloud-platform \
+  --client-id-file="/Users/marcelocampana/Projects/mcps/credentials/client_secret_728451328493-7iui8q0bbpicgb3fdukfe84goa5emsvd.apps.googleusercontent.com.json"
+```
+
+- El comando abre el navegador automáticamente. Avisar al usuario:
 
 ```
-> ⚠️ **GA4 no disponible** — El token de autenticación expiró.
-> Para obtener los datos de GA4, ejecuta en una terminal:
-> `gcloud auth application-default login`
-> Luego regenera la sección 2 de este informe.
+⚠️  GA4 requiere re-autenticación
+
+Abrí el navegador para autorizar el acceso a Google Analytics.
+Por favor autoriza con tu cuenta de Google y responde "listo" cuando termines.
 ```
 
-Si no hay ninguna propiedad disponible por otro motivo: `ga4_property = null` — omitir pasos GA4, registrar bloque ⚠️.
+Esperar respuesta del usuario:
+- Si responde "listo" → reintentar `mcp__analytics-mcp__get_account_summaries` y continuar
+- Si no responde, cancela, o el reintento falla → **detener el análisis** con este mensaje:
+
+```
+⛔ Análisis detenido — GA4 es necesario para este informe.
+Cuando tengas la autenticación resuelta, reinicia el análisis.
+```
+
+Si no hay ninguna propiedad disponible por otro motivo → **detener igualmente** con el mismo mensaje.
+
+---
+
+### Paso 0.7 — Inspección visual con Chrome DevTools
+
+Captura datos verificados directamente del sitio — estructura real del menú, textos de CTAs y elementos interactivos — que Clarity y GA4 no pueden proveer con precisión (Clarity enmascara textos; solo registra lo que el usuario clicó, no lo que existe).
+
+Si `chrome-devtools` no está disponible o falla en cualquier sub-paso → continuar sin este paso. Registrar en "Notas de datos" del informe y continuar con el Paso 1.
+
+**1. Navegar a la URL:**
+```
+mcp__chrome-devtools__navigate_page → URL de la página
+```
+
+**2. Screenshot desktop** (viewport 1280px):
+```
+mcp__chrome-devtools__take_screenshot
+```
+
+**3. Screenshot mobile** (viewport 375px):
+```
+mcp__chrome-devtools__emulate → device: "iPhone 12"
+mcp__chrome-devtools__take_screenshot
+```
+
+**4. Extraer menú desktop** (volver a desktop primero):
+```
+mcp__chrome-devtools__emulate → viewport desktop (1280px)
+mcp__chrome-devtools__evaluate_script →
+  document.querySelectorAll('nav a, header nav a, header ul li a')
+  retornar array de {texto: el.innerText.trim(), href: el.getAttribute('href')}
+  filtrar vacíos
+```
+
+**5. Capturar menú mobile expandido:**
+```
+mcp__chrome-devtools__emulate → device: "iPhone 12"
+mcp__chrome-devtools__click → selector del botón hamburguesa (buscar: button[aria-label*="menu"], .hamburger, .menu-toggle, button con ícono en header)
+mcp__chrome-devtools__evaluate_script → mismo script que paso 4 pero sobre el menú expandido
+```
+
+**6. Identificar CTAs principales** (volver a desktop):
+```
+mcp__chrome-devtools__emulate → viewport desktop
+mcp__chrome-devtools__evaluate_script →
+  document.querySelectorAll('main a, main button, .hero a, .hero button, section a[class*="btn"], section button')
+  retornar array de {texto: el.innerText.trim(), zona: identificar si está en hero/sección/footer}
+  filtrar vacíos y links de navegación del menú
+```
+
+**7. Identificar elementos interactivos vs decorativos:**
+```
+mcp__chrome-devtools__evaluate_script →
+  Listar elementos en main/section que tienen cursor: pointer (getComputedStyle) pero NO tienen href ni onclick
+  Estos son candidatos a dead clicks — elementos que parecen clicables pero no hacen nada
+```
+
+**Guardar internamente:**
+- `menu_desktop[]` — {texto, href} por ítem
+- `menu_mobile[]` — {texto, href} por ítem (menú expandido)
+- `ctas[]` — {texto, zona} de botones y links principales
+- `decorative_interactive[]` — elementos con cursor:pointer sin acción
+- `screenshot_desktop`, `screenshot_mobile` — referencias a las capturas
+
+**Comparación obligatoria:** Si `menu_desktop` y `menu_mobile` difieren en textos o cantidad de ítems → documentar diferencias explícitas. Si son idénticos → confirmarlo en una línea.
 
 ---
 
@@ -315,6 +398,7 @@ Guardar en: `$SEO_REPORTS_PATH/{dominio}/ux/ux-page-{slug}-{fecha}.md`
 
 | Sección | Pasos a ejecutar |
 |---|---|
+| 0. Inspección visual | Paso 0.7 |
 | 1. Comportamiento Clarity | Paso 1 |
 | 2. Engagement GA4 | Paso 2 |
 | 3. Performance CWV | Paso 3 |
@@ -328,6 +412,11 @@ Guardar en: `$SEO_REPORTS_PATH/{dominio}/ux/ux-page-{slug}-{fecha}.md`
 
 | Tool | Paso | Cuándo usar |
 |---|---|---|
+| `mcp__chrome-devtools__navigate_page` | 0.7 | Siempre — inspección visual del sitio |
+| `mcp__chrome-devtools__take_screenshot` | 0.7 | Siempre — capturas desktop y mobile |
+| `mcp__chrome-devtools__emulate` | 0.7 | Siempre — cambiar viewport a mobile y volver |
+| `mcp__chrome-devtools__evaluate_script` | 0.7 | Siempre — extraer menú, CTAs e interactivos |
+| `mcp__chrome-devtools__click` | 0.7 | Para expandir el menú mobile |
 | `mcp__analytics-mcp__get_account_summaries` | 0.6 | Siempre — identificar propiedad GA4 |
 | `mcp__analytics-mcp__run_report` | 2, 3.5 | Si ga4_property fue identificado |
 | `{clarity_mcp}__query-analytics-dashboard` | 1, 3.5, 4 | Si clarity_mcp fue identificado |
@@ -350,6 +439,7 @@ Si un MCP falla, no está disponible, o no retorna datos, **nunca omitir silenci
 
 | MCP | Sección afectada | Valor que aportaría |
 |---|---|---|
+| `chrome-devtools` | Inspección visual (Paso 0.7) | Menú real del sitio, CTAs verificados, elementos interactivos vs decorativos |
 | `clarity-{proyecto}` | Comportamiento (Paso 1) | Rage/dead clicks, quick backs, scroll depth para esta URL |
 | `analytics-mcp` | Engagement GA4 (Paso 2) | Sesiones, bounce rate, duración, fuentes de tráfico |
 | `pagespeed` | Performance CWV (Paso 3) | LCP, CLS, INP, FCP, TTFB mobile y desktop |

@@ -11,7 +11,10 @@ There is no application code — the "code" is the skill instructions themselves
 ## Repository structure
 
 ```
-skills/                              ← source of truth for all skills (25 total)
+skills/                              ← source of truth for all skills (28 total)
+├── webmometro-ux-deep/              ← deep UX analysis layer (requires ux-site + ux-page)
+├── webmometro-ux-site/              ← UX report for full site
+├── webmometro-ux-page/              ← UX report for a specific page
 ├── webmometro-seo/                  ← orchestrator skill (entry point)
 ├── webmometro-seo-site-profile/     ← generates/updates business context profile
 ├── webmometro-seo-page-audit/       ← single-page deep audit

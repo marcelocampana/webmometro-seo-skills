@@ -70,7 +70,24 @@
       "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-ux-page/SKILL.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-page/SKILL.md)",
       "Bash(ls /Users/marcelocampana/Documents/Work/Webmometro/seo-projects/reports/observatoriodelcancer.cl/ux/ux-page-home-*.md)",
       "Bash(gcloud auth:*)",
-      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-ux-page/references/ux-page-template.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-page/references/ux-page-template.md)"
+      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-ux-page/references/ux-page-template.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-page/references/ux-page-template.md)",
+      "Bash(mkdir -p /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-deep/references)",
+      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-ux-deep/SKILL.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-deep/SKILL.md)",
+      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-ux-deep/references/ux-deep-template.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-deep/references/ux-deep-template.md)",
+      "Read(//Users/marcelocampana/Projects/webmometro-seo-skills/$SEO_REPORTS_PATH/**)",
+      "Read(//Users/marcelocampana/Projects/webmometro-seo-skills/$SEO_REPORTS_PATH/observatoriodelcancer.cl/ux/**)",
+      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/ux-designer/rules/visual-design.md /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-ux-deep/references/rules/)",
+      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/ux-designer/rules/information-architecture.md /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-ux-deep/references/rules/)",
+      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/ux-designer/rules/interaction-design.md /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-ux-deep/references/rules/)",
+      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/ux-designer/rules/accessibility.md /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-ux-deep/references/rules/)",
+      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/ux-designer/rules/research.md /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-ux-deep/references/rules/)",
+      "Bash(mkdir -p /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-deep/references/rules)",
+      "Bash(cp /Users/marcelocampana/Projects/webmometro-seo-skills/skills/webmometro-ux-deep/references/rules/*.md /Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-deep/references/rules/)",
+      "mcp__chrome-devtools__take_screenshot",
+      "mcp__chrome-devtools__emulate",
+      "Bash(gh repo:*)",
+      "Bash(gh api:*)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ],
     "additionalDirectories": [
       "/tmp",
@@ -80,7 +97,10 @@
       "/Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-site-profile",
       "/Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-seo-site-profile/references",
       "/Users/marcelocampana/Projects/webmometro-seo-skills",
-      "/Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-page"
+      "/Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-page",
+      "/Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-deep/references",
+      "/Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-deep",
+      "/Users/marcelocampana/Projects/webmometro-seo-skills/.claude/skills/webmometro-ux-page/references"
     ]
   }
 }

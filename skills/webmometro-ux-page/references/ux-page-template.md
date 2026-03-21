@@ -34,17 +34,14 @@ tipo: ux-page
 
 ### Menú de navegación
 
-**Desktop**
+> [!info] Estructura del menú — capturada desde el DOM via Chrome DevTools
+> La estructura y destinos son datos verificados del sitio. Los conteos de clics se completan desde dos fuentes:
+> - **GA4**: poblar automáticamente si el evento `menu_click` está configurado. Si no, quedará vacío — GA4 por defecto solo registra clics en links externos.
+> - **Clarity**: completar manualmente desde el heatmap (click map), filtrando por URL de esta página y dispositivo. No usar el MCP de Clarity para este dato — los textos de elementos son ambiguos cuando el mismo texto aparece en múltiples zonas de la página.
 
-| Ítem | Destino |
-|---|---|
-| {texto} | {href} |
-
-**Mobile**
-
-| Ítem | Destino |
-|---|---|
-| {texto} | {href} |
+| Ítem | Destino | Desktop GA4 | Mobile GA4 | Desktop Clarity | Mobile Clarity |
+|---|---|---|---|---|---|
+| {texto} | {href} | | | | |
 
 > [!note] Consistencia desktop/mobile
 > {¿Los ítems y textos son idénticos en ambos dispositivos? Si hay diferencias, listarlas explícitamente. Si son iguales, confirmarlo en una línea.}

@@ -125,16 +125,33 @@ Seleccionar la propiedad que semánticamente más se parezca al dominio o nombre
 
 Si el tool falla con error de reautenticación (`Reauthentication is needed` o `gcloud auth`):
 - `ga4_property = null` — omitir todos los pasos GA4
-- Registrar en el informe:
+- Ejecutar inmediatamente en terminal (sin pedirle nada al usuario primero):
+
+```bash
+gcloud auth application-default login \
+  --scopes https://www.googleapis.com/auth/analytics.readonly,https://www.googleapis.com/auth/cloud-platform \
+  --client-id-file="/Users/marcelocampana/Projects/mcps/credentials/client_secret_728451328493-7iui8q0bbpicgb3fdukfe84goa5emsvd.apps.googleusercontent.com.json"
+```
+
+- El comando abre el navegador automáticamente. Avisar al usuario:
 
 ```
-> ⚠️ **GA4 no disponible** — El token de autenticación expiró.
-> Para obtener los datos de GA4, ejecuta en una terminal:
-> `gcloud auth application-default login`
-> Luego regenera las secciones afectadas de este informe.
+⚠️  GA4 requiere re-autenticación
+
+Abrí el navegador para autorizar el acceso a Google Analytics.
+Por favor autoriza con tu cuenta de Google y responde "listo" cuando termines.
 ```
 
-Si no hay ninguna propiedad disponible por otro motivo: `ga4_property = null` — omitir todos los pasos GA4 sin error, registrando el bloque ⚠️ correspondiente.
+Esperar respuesta del usuario:
+- Si responde "listo" → reintentar `mcp__analytics-mcp__get_account_summaries` y continuar
+- Si no responde, cancela, o el reintento falla → **detener el análisis** con este mensaje:
+
+```
+⛔ Análisis detenido — GA4 es necesario para este informe.
+Cuando tengas la autenticación resuelta, reinicia el análisis.
+```
+
+Si no hay ninguna propiedad disponible por otro motivo → **detener igualmente** con el mismo mensaje.
 
 ---
 

@@ -28,6 +28,37 @@ tipo: ux-page
 
 ---
 
+## Observación visual del sitio
+
+*Fuente: Chrome DevTools — captura directa del sitio al momento de la generación del informe*
+
+### Menú de navegación
+
+> [!info] Estructura del menú — capturada desde el DOM via Chrome DevTools
+> La estructura y destinos son datos verificados del sitio. Los conteos de clics se completan desde dos fuentes:
+> - **GA4**: poblar automáticamente si el evento `menu_click` está configurado. Si no, quedará vacío — GA4 por defecto solo registra clics en links externos.
+> - **Clarity**: completar manualmente desde el heatmap (click map), filtrando por URL de esta página y dispositivo. No usar el MCP de Clarity para este dato — los textos de elementos son ambiguos cuando el mismo texto aparece en múltiples zonas de la página.
+
+| Ítem | Destino | Desktop GA4 | Mobile GA4 | Desktop Clarity | Mobile Clarity |
+|---|---|---|---|---|---|
+| {texto} | {href} | | | | |
+
+> [!note] Consistencia desktop/mobile
+> {¿Los ítems y textos son idénticos en ambos dispositivos? Si hay diferencias, listarlas explícitamente. Si son iguales, confirmarlo en una línea.}
+
+### CTAs principales
+
+| Texto del botón o enlace | Zona de la página |
+|---|---|
+| {texto} | {hero / sección / footer} |
+
+### Elementos interactivos vs decorativos
+
+> [!note]
+> {Lista de elementos que tienen interactividad declarada (cursor activo, enlace o acción asignada) versus elementos que visualmente parecen clicables pero no tienen ninguna acción. Permite validar o refutar los clics sin respuesta registrados por Clarity.}
+
+---
+
 ## Resumen ejecutivo
 
 > [!abstract] UX Page Score: {score}/100 — {estado}
